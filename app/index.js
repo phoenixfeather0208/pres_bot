@@ -83,11 +83,11 @@ function handleMessage(sender_psid, received_message) {
     // check if the message contains text
     if (received_message.text) {
         // NLP greeting
-        const greeting = firstTrait(received_message.nlp, "wit$greetings");
+        const nlp = nlpHandler(received_message.nlp, "wit$greetings");
 
-        if (greeting && greeting.confidence > 0.8) {
-            // check firstTrait function output
-            console.log("firstTrait() returned: \n", util.inspect(greeting, false, null, true /* enable colors */));
+        if (nlp && nlp.confidence > 0.8) {
+            // check nlpHandler function output
+            console.log("nlpHandler() returned: \n", util.inspect(nlp, false, null, true /* enable colors */));
             response = 
             {
                 "text": "Hello to my favorite human! How are you? :)"
@@ -191,6 +191,6 @@ function callSendAPI(sender_psid, response) {
 }
 
 // NLP helper function.
-function firstTrait(nlp, name) {
+function nlpHandler(nlp, name) {
     return nlp && nlp.entities && nlp.traits[name] && nlp.traits[name][0];
 }

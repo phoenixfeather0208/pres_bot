@@ -6,6 +6,9 @@ const app = express().use(bodyParser.json());
 const request = require("request");
 require("dotenv").config();
 
+// debug
+const util = require("util");
+
 app.listen(process.env.PORT || 1337, () => console.log("listening..."));
 
 // GET REQUEST - VERIFY WEBHOOK
@@ -57,9 +60,6 @@ app.post('/webhook', (req, res) => {
 
             // check if the event is a message or postback and pass the event to the appropiate handler function
             if (webhook_event.message) {
-                // detect NLP key
-                console.log("NLP object: " + webhook_event.message.nlp);
-
                 handleMessage(sender_psid, webhook_event.message);
             }
             else if (webhook_event.postback) {
@@ -84,10 +84,10 @@ function handleMessage(sender_psid, received_message) {
     if (received_message.text) {
         // NLP greeting
         const greeting = firstTrait(received_message.nlp, "wit$greetings");
-        // check confidence
-        console.log("Confidence level: " + greeting.confidence);
 
         if (greeting && greeting.confidence > 0.8) {
+            // check firstTrait function output
+            console.log("firstTrait() returned: \n", util.inspect(greeting, false, null, true /* enable colors */));
             response = 
             {
                 "text": "Hello to my favorite human! How are you? :)"

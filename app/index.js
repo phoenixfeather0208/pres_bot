@@ -57,7 +57,10 @@ app.post('/webhook', (req, res) => {
 
             // check if the event is a message or postback and pass the event to the appropiate handler function
             if (webhook_event.message) {
-                handleMessage(webhook_event.sender, webhook_event.message);
+                // detect NLP key
+                console.log("NLP object: " + webhook_event.message.nlp);
+
+                handleMessage(sender_psid, webhook_event.message);
             }
             else if (webhook_event.postback) {
                 handlePostback(sender_psid, webhook_event.postback);
@@ -74,16 +77,14 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(sender, received_message) {
+function handleMessage(sender_psid, received_message) {
     let response;
-
-    console.log("Received message from " + sender.name);
 
     // check if the message contains text
     if (received_message.text) {
         response = 
         {
-            "text": 'Hello, ' + sender.first_name + '! You sent me a message: "' + received_message.text +'". Send me more or an image!'
+            "text": 'You sent me a message: "' + received_message.text +'". Send me more texts or an image!'
         }
     }
 
@@ -123,7 +124,7 @@ function handleMessage(sender, received_message) {
     }
 
     // sends the response
-    callSendAPI(sender.id, response);
+    callSendAPI(sender_psid, response);
 }
 
 // Handles messaging_postbacks events

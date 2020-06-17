@@ -82,9 +82,22 @@ function handleMessage(sender_psid, received_message) {
 
     // check if the message contains text
     if (received_message.text) {
-        response = 
-        {
-            "text": 'You sent me a message: "' + received_message.text +'". Send me more texts or an image!'
+        // NLP greeting
+        const greeting = firstTrait(received_message.nlp, "wit$greetings");
+        // check confidence
+        console.log("Confidence level: " + greeting.confidence);
+
+        if (greeting && greeting.confidence > 0.8) {
+            response = 
+            {
+                "text": "Hello to my favorite human! How are you? :)"
+            }
+        }
+        else {
+            response =
+            {
+                "text": 'You sent me a message: "' + received_message.text + '". Send me more texts or an image!'
+            }
         }
     }
 
@@ -175,4 +188,9 @@ function callSendAPI(sender_psid, response) {
             console.error("Unable to send message: " + err);
         }
     })
+}
+
+// NLP helper function.
+function firstTrait(nlp, name) {
+    return nlp && nlp.entities && nlp.traits[name] && nlp.traits[name][0];
 }

@@ -1,5 +1,6 @@
 .gcloudignore
 .env
-package*
+*.json
 node_modules
-cloudbuild.yaml
+*.yaml
+*.code-workspace

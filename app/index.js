@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express().use(bodyParser.json());
 const request = require("request");
 require("dotenv").config();
+const nlp = require("./nlp")
 
 // debug
 const util = require("util");
@@ -81,12 +82,13 @@ function handleMessage(sender_psid, received_message) {
     // check if the message contains text
     if (received_message.text) {
         // NLP greeting
-        const nlp = nlpHandler(received_message.nlp, "wit$greetings");
+        const NLP = nlp.nlpHandler(received_message.nlp, "wit$greetings");
 
         // check nlpHandler function output
         console.log("nlp object: \n", util.inspect(received_message.nlp, false, null, true /* enable colors */));
+        console.log("NLP API returned: \n", util.inspect(NLP, false, null, true /* enable colors */));
 
-        if (nlp && nlp.confidence > 0.8) {
+        if (NLP && NLP.confidence > 0.8) {
             response = 
             {
                 "text": "Hello to my favorite human! How are you? :)"
@@ -98,6 +100,7 @@ function handleMessage(sender_psid, received_message) {
                 "text": `You sent me a message: ${received_message.text}. Send me more messages or an image!`
             }
         }
+
     }
 
     else if (received_message.attachments) {
@@ -184,9 +187,4 @@ function callSendAPI(sender_psid, response) {
             console.error("Unable to send message: " + err);
         }
     })
-}
-
-// NLP helper function.
-function nlpHandler(nlp, name) {
-    return nlp && nlp.entities && nlp.traits[name] && nlp.traits[name][0];
 }

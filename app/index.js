@@ -52,11 +52,9 @@ app.post('/webhook', (req, res) => {
             // Gets the message. entry.messaging is an array, but 
             // will only ever contain one message, so we get index 0
             let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
 
             // Get the sender's PSID
             let sender_psid = webhook_event.sender.id;
-            console.log("Sender PSID: " + sender_psid);
 
             // check if the event is a message or postback and pass the event to the appropiate handler function
             if (webhook_event.message) {
@@ -85,9 +83,10 @@ function handleMessage(sender_psid, received_message) {
         // NLP greeting
         const nlp = nlpHandler(received_message.nlp, "wit$greetings");
 
+        // check nlpHandler function output
+        console.log("nlp object: \n", util.inspect(received_message.nlp, false, null, true /* enable colors */));
+
         if (nlp && nlp.confidence > 0.8) {
-            // check nlpHandler function output
-            console.log("nlpHandler() returned: \n", util.inspect(nlp, false, null, true /* enable colors */));
             response = 
             {
                 "text": "Hello to my favorite human! How are you? :)"
@@ -96,7 +95,7 @@ function handleMessage(sender_psid, received_message) {
         else {
             response =
             {
-                "text": 'You sent me a message: "' + received_message.text + '". Send me more texts or an image!'
+                "text": `You sent me a message: ${received_message.text}. Send me more messages or an image!`
             }
         }
     }
@@ -181,10 +180,7 @@ function callSendAPI(sender_psid, response) {
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
-        if (!err) {
-            console.log("Message sent!");
-        }
-        else {
+        if (err) {
             console.error("Unable to send message: " + err);
         }
     })

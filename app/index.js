@@ -54,14 +54,7 @@ app.post('/webhook', (req, res) => {
 
             // Get the sender's PSID
             let sender_psid = webhook_event.sender.id;
-
-            // check if the event is a message or postback and pass the event to the appropiate handler function
-            if (webhook_event.message) {
-                handleMessage(sender_psid, webhook_event.message);
-            }
-            else if (webhook_event.postback) {
-                handlePostback(sender_psid, webhook_event.postback);
-            }
+            get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
         // Returns a '200 OK' response to all requests
@@ -74,15 +67,14 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+function handleMessage(sender_psid, received_message, sender) {
     let response;
 
     // check if the message contains text
     if (received_message.text) {
         // run the NLP handler.
         const NLP = nlp.nlpHandler(received_message.nlp);
-
-        response = nlp.response(NLP, received_message.text);
+        response = nlp.response(NLP, received_message.text, sender);
     }
 
     else if (received_message.attachments) {
@@ -159,14 +151,45 @@ function callSendAPI(sender_psid, response) {
     }
 
     // send the POST request to the Messenger platform
-    request({
+    request(
+        {
         "url": "https://graph.facebook.com/v2.6/me/messages",
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN},
         "method": "POST",
         "json": request_body
-    }, (err, res, body) => {
+        }, (err, res, body) => {
         if (err) {
             console.error("Unable to send message: " + err);
         }
     })
+}
+
+// get user profile info and respond.
+function get_user_profile_then_respond(psid, event) {
+    request(
+        {
+        "url": `https://graph.facebook.com/${psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+        "method": "GET"
+        }, (err, body) => {
+            if (err) {
+                console.error("User Profile API error");
+            }
+            else {
+                //debug
+                let pretty_obj = JSON.stringify(body.body, undefined, 2);
+                console.log("\n\n User API: \n");
+                console.log(pretty_obj);
+
+                let obj = JSON.parse(body.body);
+
+                // check if the event is a message or postback and pass the event to the appropiate handler function
+                if (event.message) {
+                    handleMessage(psid, event.message, obj);
+                }
+                else if (event.postback) {
+                    handlePostback(psid, event.postback);
+                }
+            }
+        }
+    )
 }

@@ -20,17 +20,26 @@ function nlpHandler(nlp) {
 function responseHandler(nlp_entities, message, user) {
     // debug
     console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
-    // unrecognized input.
-    if (Object.keys(nlp_entities).length === 0) {
-        return {
-            "text": `${user.first_name}, you sent me a message: "${message}". Send me more messages or an image!`
+
+    // nlp_entities defined.
+    try {
+        // respond to greetings.
+        if (nlp_entities["wit$greetings"][0].confidence >= 0.8) {
+            return {
+                "text": `Hello, ${user.first_name}! My favorite human! How is it going? :)`
+            }
         }
     }
-    
-    // respond to greetings.
-    else if (nlp_entities["wit$greetings"][0].confidence >= 0.8) {
+
+    // catch nlp_entities error.
+    catch (err) {
+        console.log("Message with no entities detected!");
+    }
+
+    // generic response.
+    finally {
         return {
-            "text": `Hello, ${user.first_name}! My favorite human! How is it going? :)`
+            "text": `${user.first_name}, you sent me a message: "${message}". Send me more messages or an image!`
         }
     }
 }

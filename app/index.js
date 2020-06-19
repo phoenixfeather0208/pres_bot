@@ -177,8 +177,10 @@ function get_user_profile_then_respond(psid, event) {
             else {
                 //debug
                 let pretty_obj = JSON.stringify(body.body, undefined, 2);
-                console.log("\n\n User API: \n");
+                console.log("\n User API: \n");
                 console.log(pretty_obj);
+                console.log("\n");
+                console.log("Message: " + event.message);
 
                 let obj = JSON.parse(body.body);
 

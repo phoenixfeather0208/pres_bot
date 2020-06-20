@@ -1,6 +1,8 @@
 // debug
 const util = require("util");
 
+var confidence_threshold = 0.8;
+
 /**
  * NLP handler. Returns traits and entities.
  * @param {Object} nlp : NLP object generated from wit.ai
@@ -21,27 +23,33 @@ function responseHandler(nlp_entities, message, user) {
     // debug
     console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
 
-    // nlp_entities defined.
-    try {
-        // respond to greetings.
-        if (nlp_entities["wit$greetings"][0].confidence >= 0.8) {
+    // iterate NLP object to check for traits.
+    for (let key in nlp_entities) {
+        // greet the user.
+        if ((key == "wit$greetings") && (checkConfidence(nlp_entities[key]))) {
             return {
                 "text": `Hello, ${user.first_name}! My favorite human! How is it going? :)`
             }
         }
+
+        // TODO: add more response to different traits. Training needed.
     }
 
-    // catch nlp_entities error.
-    catch (err) {
-        console.log("Message with no entities detected!");
+    // out-of-scope message.
+    return {
+        "text": `${user.first_name}, you sent me a message: "${message}". Send me more messages or an image!`
     }
+}
 
-    // generic response.
-    finally {
-        return {
-            "text": `${user.first_name}, you sent me a message: "${message}". Send me more messages or an image!`
-        }
+/**
+ * This function checks if the trait meets confidence threshold.
+ * @param {Object} key : wit.ai traits or entities
+ */
+function checkConfidence(key) {
+    if (key[0].confidence >= confidence_threshold) {
+        return true;
     }
+    else return false;
 }
 
 exports.nlpHandler = nlpHandler;

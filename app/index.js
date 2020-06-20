@@ -72,6 +72,9 @@ function handleMessage(sender_psid, received_message, sender) {
 
     // check if the message contains text
     if (received_message.text) {
+        // debug
+        console.log("Message received: "+received_message.text);
+
         // run the NLP handler.
         const NLP = nlp.nlpHandler(received_message.nlp);
         response = nlp.response(NLP, received_message.text, sender);
@@ -180,7 +183,6 @@ function get_user_profile_then_respond(psid, event) {
                 console.log("\n User API: \n");
                 console.log(pretty_obj);
                 console.log("\n");
-                console.log("Message: " + event.message);
 
                 let obj = JSON.parse(body.body);
 

@@ -1,3 +1,5 @@
+"strict mode";
+
 // debug
 const util = require("util");
 

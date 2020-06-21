@@ -18,23 +18,52 @@ function responseHandler(nlp_entities, message, user) {
 
     // Step 1: Variables to store entities and traits.
     let traits = [];
+    let entities = [];
 
-    // Step 2: Fetch.
+    // Step 2: Fetch traits.
     for (let keys in nlp_entities.traits) {
         traits.push(nlp_entities.traits[keys]);
     }
 
-    // greet the users
+    // Step 3: Fetch entities.
+    for (let keys in nlp_entities.entities) {
+        entities.push(nlp_entities.entities[keys]);
+    }
+
+    // Step 4: Respond appropriately based on intent.
+
+    // greet the users - only if the user gets my name correctly. 
     if (nlp_entities.intents[0].name == "greet") {
-        let greetTraits = nlp_entities.traits["wit$greetings"];
-        if ((traits.includes(greetTraits)) && checkConfidence(greetTraits)) {  
-            return {
-                "text": `Hello, ${user.first_name}! My favorite human! How is it going? :)`
+        let greetTrait = nlp_entities.traits["wit$greetings"];
+        let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣"];
+        if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
+            if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {
+                // check name
+                let name = nlp_entities.entities["name:name"][0].body.toLowerCase();
+                console.log("Verify input name: " + name);
+                if (!acceptableName.includes(name)) {
+                    console.log("Wrong name!");
+                    return {
+                        "text": "Lmao! Do you even know my name? Let's try this again. :P"
+                    }
+                }
+                else {
+                    return {
+                        "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`
+                    }
+                }
+            }
+
+            // respond to users (strangers) who do not know my name.
+            else {
+                return {
+                    "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`
+                }
             }
         }
     }
 
-    // TODO: add more response to different traits. Training needed.
+    // TODO: add more response to different intents. Training needed.
 
     // out-of-scope message.
     return {

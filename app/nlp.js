@@ -67,7 +67,7 @@ function responseHandler(nlp_entities, message, user) {
 
     // out-of-scope message.
     return {
-        "text": `${user.first_name}, you sent me a message: "${message}". Send me more messages or an image!`
+        "text": `Hey, ${user.first_name}. As much as I love to discuss "${message}" with you. I am not the perfect bot yet. Maybe you should talk to human Preston Ong!`
     }
 }
 

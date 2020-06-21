@@ -75,9 +75,7 @@ function handleMessage(sender_psid, received_message, sender) {
         // debug
         console.log("Message received: "+received_message.text);
 
-        // run the NLP handler.
-        const NLP = nlp.nlpHandler(received_message.nlp);
-        response = nlp.response(NLP, received_message.text, sender);
+        response = nlp.response(received_message.nlp, received_message.text, sender);
     }
 
     else if (received_message.attachments) {

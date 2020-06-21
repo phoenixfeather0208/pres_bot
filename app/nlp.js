@@ -17,6 +17,7 @@ function responseHandler(nlp_entities, message, user) {
     console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
 
     // Step 1: Variables to store entities and traits.
+    let intent = nlp_entities.intents;
     let traits = [];
     let entities = [];
 
@@ -30,26 +31,65 @@ function responseHandler(nlp_entities, message, user) {
         entities.push(nlp_entities.entities[keys]);
     }
 
-    // Step 4: Respond appropriately based on intent.
+    console.log("Intents: \n", util.inspect(intent, false, null, true /* enable colors */));
 
-    // greet the users - only if the user gets my name correctly. 
-    if (nlp_entities.intents[0].name == "greet") {
-        let greetTrait = nlp_entities.traits["wit$greetings"];
-        let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣"];
-        if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
-            if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {
-                // check name
-                let name = nlp_entities.entities["name:name"][0].body.toLowerCase();
-                console.log("Verify input name: " + name);
-                if (!acceptableName.includes(name)) {
-                    console.log("Wrong name!");
+    // Step 4: Respond appropriately based on intent.
+    if (intent.length > 0) {
+        // greet the users - only if the user gets my name correctly. 
+        if ((intent[0].name == "greet") && (intent[0].confidence >= confidence_threshold)) {
+            let greetTrait = nlp_entities.traits["wit$greetings"];
+            let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣"];
+            if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
+                if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {
+                    // check name
+                    let name = nlp_entities.entities["name:name"][0].body.toLowerCase();
+                    console.log("Verify input name: " + name);
+                    if (!acceptableName.includes(name)) {
+                        console.log("Wrong name!");
+                        return {
+                            "text": "Lmao! Do you even know my name? Let's try this again. :P",
+                            "quick_replies": [
+                                {
+                                    "content_type": "text",
+                                    "title": "Let's talk!",
+                                    "payload": "talk"
+                                },
+                                {
+                                    "content_type": "text",
+                                    "title": "Goodbye!",
+                                    "payload": "bye"
+                                }
+                            ]
+                        }
+                    }
+                    else {
+                        return {
+                            "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`,
+                            "quick_replies": [
+                                {
+                                    "type": "text",
+                                    "title": "Let's talk!",
+                                    "payload": "talk"
+                                },
+                                {
+                                    "type": "text",
+                                    "title": "Goodbye!",
+                                    "payload": "bye"
+                                }
+                            ]
+                        }
+                    }
+                }
+
+                // respond to users (strangers) who do not know my name.
+                else {
                     return {
-                        "text": "Lmao! Do you even know my name? Let's try this again. :P",
+                        "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`,
                         "quick_replies": [
                             {
-                                "content_type" : "text",
-                                "title" : "Let's talk!",
-                                "payload" : "talk"
+                                "content_type": "text",
+                                "title": "Let's talk!",
+                                "payload": "talk"
                             },
                             {
                                 "content_type": "text",
@@ -58,42 +98,6 @@ function responseHandler(nlp_entities, message, user) {
                             }
                         ]
                     }
-                }
-                else {
-                    return {
-                        "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`,
-                        "quick_replies" : [
-                            {
-                                "type": "text",
-                                "title": "Let's talk!",
-                                "payload": "talk"
-                            },
-                            {
-                                "type": "text",
-                                "title": "Goodbye!",
-                                "payload": "bye"
-                            }
-                        ]
-                    }
-                }
-            }
-
-            // respond to users (strangers) who do not know my name.
-            else {
-                return {
-                    "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`,
-                    "quick_replies": [
-                        {
-                            "content_type": "text",
-                            "title": "Let's talk!",
-                            "payload": "talk"
-                        },
-                        {
-                            "content_type": "text",
-                            "title": "Goodbye!",
-                            "payload": "bye"
-                        }
-                    ]
                 }
             }
         }

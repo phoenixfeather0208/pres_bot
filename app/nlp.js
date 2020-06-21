@@ -90,8 +90,11 @@ function responseHandler(nlp_entities, message, user) {
             }
         }
 
-        // TODO: add more response to different intents. Training needed.
-
+        else if (intent[0].name == "bye") {
+            return {
+                "text": "Ok. Goodbye! 👋"
+            }
+        }
     }
 
     // out-of-scope message.

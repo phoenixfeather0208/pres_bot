@@ -151,7 +151,7 @@ function handleQuickReplies(sender_psid, quickRepliesEvent) {
     if (payload == "talk") {
         response = 
         {
-            "text": "Cool! Let's talk! I am a great listener."
+            "text": "Cool! Let's talk! I am a great listener. What would you like to talk about?"
         }
     }
     else if (payload == "bye") {

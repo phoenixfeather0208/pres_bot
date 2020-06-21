@@ -34,9 +34,9 @@ function responseHandler(nlp_entities, message, user) {
     console.log("Intents: \n", util.inspect(intent, false, null, true /* enable colors */));
 
     // Step 4: Respond appropriately based on intent.
-    if (intent.length > 0) {
+    if ((intent.length > 0) && (intent[0].confidence >= confidence_threshold)) {
         // greet the users - only if the user gets my name correctly. 
-        if ((intent[0].name == "greet") && (intent[0].confidence >= confidence_threshold)) {
+        if (intent[0].name == "greet") {
             let greetTrait = nlp_entities.traits["wit$greetings"];
             let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣"];
             if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
@@ -47,19 +47,7 @@ function responseHandler(nlp_entities, message, user) {
                     if (!acceptableName.includes(name)) {
                         console.log("Wrong name!");
                         return {
-                            "text": "Lmao! Do you even know my name? Let's try this again. :P",
-                            "quick_replies": [
-                                {
-                                    "content_type": "text",
-                                    "title": "Let's talk!",
-                                    "payload": "talk"
-                                },
-                                {
-                                    "content_type": "text",
-                                    "title": "Goodbye!",
-                                    "payload": "bye"
-                                }
-                            ]
+                            "text": "Lmao! Do you even know my name? Let's try this again. :P"
                         }
                     }
                     else {
@@ -101,9 +89,10 @@ function responseHandler(nlp_entities, message, user) {
                 }
             }
         }
-    }
 
-    // TODO: add more response to different intents. Training needed.
+        // TODO: add more response to different intents. Training needed.
+
+    }
 
     // out-of-scope message.
     return {

@@ -44,12 +44,36 @@ function responseHandler(nlp_entities, message, user) {
                 if (!acceptableName.includes(name)) {
                     console.log("Wrong name!");
                     return {
-                        "text": "Lmao! Do you even know my name? Let's try this again. :P"
+                        "text": "Lmao! Do you even know my name? Let's try this again. :P",
+                        "quick_replies": [
+                            {
+                                "content_type" : "text",
+                                "title" : "Let's talk!",
+                                "payload" : "talk"
+                            },
+                            {
+                                "content_type": "text",
+                                "title": "Goodbye!",
+                                "payload": "bye"
+                            }
+                        ]
                     }
                 }
                 else {
                     return {
-                        "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`
+                        "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`,
+                        "quick_replies" : [
+                            {
+                                "type": "text",
+                                "title": "Let's talk!",
+                                "payload": "talk"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Goodbye!",
+                                "payload": "bye"
+                            }
+                        ]
                     }
                 }
             }
@@ -57,7 +81,19 @@ function responseHandler(nlp_entities, message, user) {
             // respond to users (strangers) who do not know my name.
             else {
                 return {
-                    "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`
+                    "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`,
+                    "quick_replies": [
+                        {
+                            "content_type": "text",
+                            "title": "Let's talk!",
+                            "payload": "talk"
+                        },
+                        {
+                            "content_type": "text",
+                            "title": "Goodbye!",
+                            "payload": "bye"
+                        }
+                    ]
                 }
             }
         }
@@ -67,7 +103,19 @@ function responseHandler(nlp_entities, message, user) {
 
     // out-of-scope message.
     return {
-        "text": `Hey, ${user.first_name}. As much as I love to discuss "${message}" with you. I am not the perfect bot yet. Maybe you should talk to human Preston Ong!`
+        "text": `Hey, ${user.first_name}. As much as I love to discuss "${message}" with you. I am not the perfect bot yet. Maybe you should talk to human Preston Ong!`,
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Let's talk!",
+                "payload": "talk"
+            },
+            {
+                "content_type": "text",
+                "title": "Goodbye!",
+                "payload": "bye"
+            }
+        ]
     }
 }
 

@@ -7,6 +7,8 @@ const request = require("request");
 require("dotenv").config();
 const nlp = require("./nlp");
 
+// debug
+const util = require("util");
 
 app.listen(process.env.PORT || 1337, () => console.log("listening..."));
 
@@ -137,6 +139,27 @@ function handlePostback(sender_psid, received_postback) {
             "text": "Oh no! I guess I am not a good bot."
         }
     }
+    
+    // send the response
+    callSendAPI(sender_psid, response);
+}
+
+// Handles quick reply
+function handleQuickReplies(sender_psid, quickRepliesEvent) {
+    let response;
+    let payload = quickRepliesEvent.payload;
+    if (payload == "talk") {
+        response = 
+        {
+            "text": "Cool! Let's talk! I am a great listener."
+        }
+    }
+    else if (payload == "bye") {
+        response =
+        {
+            "text": "Ok. Goodbye! 👋"
+        }
+    }
 
     // send the response
     callSendAPI(sender_psid, response);
@@ -144,17 +167,21 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
+    // debug response
+    console.log("Sending response: \n", util.inspect(response, false, null, true /* enable colors */));
+
     // constrcut the message body
     let request_body = 
     {
         "recipient": {"id": sender_psid},
-        "message": response
+        "message": response,
+        "messaging-type": "RESPONSE"
     }
 
     // send the POST request to the Messenger platform
     request(
         {
-        "url": "https://graph.facebook.com/v2.6/me/messages",
+        "url": "https://graph.facebook.com/v7.0/me/messages",
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN},
         "method": "POST",
         "json": request_body
@@ -186,7 +213,12 @@ function get_user_profile_then_respond(psid, event) {
 
                 // check if the event is a message or postback and pass the event to the appropiate handler function
                 if (event.message) {
-                    handleMessage(psid, event.message, obj);
+                    if (event.message.quick_reply) {
+                        handleQuickReplies(psid, event.message.quick_reply);
+                    }
+                    else {
+                        handleMessage(psid, event.message, obj);
+                    }
                 }
                 else if (event.postback) {
                     handlePostback(psid, event.postback);

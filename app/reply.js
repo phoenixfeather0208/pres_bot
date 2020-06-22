@@ -2,6 +2,7 @@
 
 // debug
 const util = require("util");
+const attachment = require("./attachment");
 
 /**
  * Handles quick reply payload and generate response.
@@ -11,7 +12,7 @@ const util = require("util");
 function handleReplyPayload(payload) {
     if (payload == "talk") {
         return{
-            "text": "Cool! Let's talk! I am a great listener. What would you like to talk about?",
+            "text": "Cool! I am a great listener. What would you like to talk about?",
             "quick_replies": [
                 {
                     "content_type": "text",
@@ -42,13 +43,25 @@ function handleReplyPayload(payload) {
                     "elements": [
                         {
                             "title": "Hire me!",
-                            "subtitle": "Check out my website.",
-                            "default_action":
-                            {
-                                "type": "web_url",
-                                "url": "https://prestonongis.online/",
-                                "webview_height_ratio": "tall"
-                            }
+                            "subtitle": "I recently graduated from UC Davis. Seeking full-time position in software engineering. Check out my website and portfolio! :)",
+                            "image_url": "https://raw.githubusercontent.com/preston4896/preston4896.github.io/master/assets/headshot.png",
+                            "buttons" : [
+                                {
+                                    "type": "web_url",
+                                    "url": "https://prestonongis.online/",
+                                    "title" : "Website"
+                                },
+                                {
+                                    "type" : "web_url",
+                                    "url" : "http://github.com/preston4896",
+                                    "title" : "GitHub"
+                                },
+                                {
+                                    "type": "web_url",
+                                    "url": "http://linkedin.com/in/prestonong",
+                                    "title": "LinkedIn"
+                                }
+                            ]
                         }
                     ]
                 }

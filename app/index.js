@@ -151,13 +151,37 @@ function handleQuickReplies(sender_psid, quickRepliesEvent) {
     if (payload == "talk") {
         response = 
         {
-            "text": "Cool! Let's talk! I am a great listener. What would you like to talk about?"
+            "text": "Cool! Let's talk! I am a great listener. What would you like to talk about?",
+            "quick_replies": [
+                {
+                    "content_type": "text",
+                    "title": "Get to know Preston!",
+                    "payload": "intro"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Hire Preston!",
+                    "payload": "hire"
+                }
+            ]
         }
     }
     else if (payload == "bye") {
         response =
         {
             "text": "Ok. Goodbye! 👋"
+        }
+    }
+    else if (payload == "hire") {
+        response =
+        {
+            "text": "Hire me!"
+        }
+    }
+    else if (payload == "intro") {
+        response =
+        {
+            "text": "Hello! My name is Preston Ong. That's it for now. I will do a better job at introducing myself in the future. :P"
         }
     }
 

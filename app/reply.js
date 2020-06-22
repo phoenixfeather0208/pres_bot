@@ -2,7 +2,6 @@
 
 // debug
 const util = require("util");
-const attachment = require("./attachment");
 
 /**
  * Handles quick reply payload and generate response.
@@ -43,7 +42,7 @@ function handleReplyPayload(payload) {
                     "elements": [
                         {
                             "title": "Hire me!",
-                            "subtitle": "I recently graduated from UC Davis. Seeking full-time position in software engineering. Check out my website and portfolio! :)",
+                            "subtitle": "Select an option!",
                             "image_url": "https://raw.githubusercontent.com/preston4896/preston4896.github.io/master/assets/headshot.png",
                             "buttons" : [
                                 {
@@ -57,9 +56,9 @@ function handleReplyPayload(payload) {
                                     "title" : "GitHub"
                                 },
                                 {
-                                    "type": "web_url",
-                                    "url": "http://linkedin.com/in/prestonong",
-                                    "title": "LinkedIn"
+                                    "type": "postback",
+                                    "title": "Quick Summary",
+                                    "payload": "summary"
                                 }
                             ]
                         }

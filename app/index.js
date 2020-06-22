@@ -6,6 +6,8 @@ const app = express().use(bodyParser.json());
 const request = require("request");
 require("dotenv").config();
 const nlp = require("./nlp");
+const attachment = require("./attachment");
+const reply = require("./reply");
 
 // debug
 const util = require("util");
@@ -82,36 +84,7 @@ function handleMessage(sender_psid, received_message, sender) {
     else if (received_message.attachments) {
         // Get the URL of the attachment
         let attachment_url = received_message.attachments[0].payload.url;
-        response = 
-        {
-            "attachment": 
-            {
-                "type": "template",
-                "payload": 
-                {
-                    "template_type": "generic",
-                    "elements": [
-                        {
-                            "title": "Is this the right picture?",
-                            "subtitle": "Tap a button to answer.",
-                            "image_url": attachment_url,
-                            "buttons": [
-                                {
-                                    "type" : "postback",
-                                    "title" : "Yes!",
-                                    "payload" : "yes"
-                                },
-                                {
-                                    "type": "postback",
-                                    "title": "No!",
-                                    "payload": "no"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
+        response = attachment.responseAttachment(attachment_url);
     }
 
     // sends the response
@@ -125,19 +98,7 @@ function handlePostback(sender_psid, received_postback) {
     // get the payload for the postback
     let payload = received_postback.payload;
 
-    // set the response based on the payload
-    if (payload == "yes") {
-        response = 
-        {
-            "text" : "Thanks!"
-        }
-    }
-    else if (payload == "no") {
-        response =
-        {
-            "text": "Oh no! I guess I am not a good bot."
-        }
-    }
+    response = attachment.handleAttachmentPayload(payload);
     
     // send the response
     callSendAPI(sender_psid, response);

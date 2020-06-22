@@ -52,7 +52,7 @@ function responseHandler(nlp_entities, message, user) {
                     }
                     else {
                         return {
-                            "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`,
+                            "text": `What's up, ${user.first_name}! It's good to see you. 😎`,
                             "quick_replies": [
                                 {
                                     "content_type": "text",
@@ -72,11 +72,11 @@ function responseHandler(nlp_entities, message, user) {
                 // respond to users (strangers) who do not know my name.
                 else {
                     return {
-                        "text": `Hello, ${user.first_name}! Enchanté! How is it going? :)`,
+                        "text": `Hello, ${user.first_name}! Enchanté! We should be friends! :)`,
                         "quick_replies": [
                             {
                                 "content_type": "text",
-                                "title": "Let's talk!",
+                                "title": "Let's talk more!",
                                 "payload": "talk"
                             },
                             {

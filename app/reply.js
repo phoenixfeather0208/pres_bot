@@ -46,6 +46,11 @@ function handleReplyPayload(payload) {
                             "image_url": "https://raw.githubusercontent.com/preston4896/preston4896.github.io/master/assets/headshot.png",
                             "buttons" : [
                                 {
+                                    "type": "postback",
+                                    "title": "Quick Summary",
+                                    "payload": "summary"
+                                },
+                                {
                                     "type": "web_url",
                                     "url": "https://prestonongis.online/",
                                     "title" : "Website"
@@ -54,11 +59,6 @@ function handleReplyPayload(payload) {
                                     "type" : "web_url",
                                     "url" : "http://github.com/preston4896",
                                     "title" : "GitHub"
-                                },
-                                {
-                                    "type": "postback",
-                                    "title": "Quick Summary",
-                                    "payload": "summary"
                                 }
                             ]
                         }

@@ -2,6 +2,7 @@
 
 // debug
 const util = require("util");
+const responses = require("./responses");
 
 /**
  * Respond with a generic template based on the image url.
@@ -49,24 +50,16 @@ function responseAttachment(url) {
 function handleAttachmentPayload(payload) {
     // set the response based on the payload
     if (payload == "yes") {
-        return{
-            "text": "Thanks!"
-        }
+        return responses.payload_yes;
     }
     else if (payload == "no") {
-        return{
-            "text": "Oh no! I guess I am not a good bot."
-        }
+        return responses.payload_no;
     }
     else if (payload == "summary") {
-        return {
-            "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain!"
-        }
+        return responses.payload_summary;
     }
     else if (payload == "get_started") {
-        return {
-            "text": "To begin, say hi!"
-        }
+        return responses.get_started;
     }
 }
 

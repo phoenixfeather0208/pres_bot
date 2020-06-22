@@ -2,6 +2,7 @@
 
 // debug
 const util = require("util");
+const responses = require("./responses");
 
 var confidence_threshold = 0.8;
 
@@ -43,9 +44,7 @@ function responseHandler(nlp_entities, message, user) {
             // ignore intent when incorrect name detected.
             if (!acceptableName.includes(name)) {
                 console.log("Wrong name!");
-                return {
-                    "text": "Lmao! Do you even know my name? Let's try this again. :P"
-                }
+                return responses.wrongName;
             }
         }
 
@@ -54,57 +53,25 @@ function responseHandler(nlp_entities, message, user) {
         if (intent[0].name == "greet") {
             let greetTrait = nlp_entities.traits["wit$greetings"];
             if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
-                return {
-                    "text": `What's up, ${user.first_name}! It's good to see you. 😎`,
-                    "quick_replies": [
-                        {
-                            "content_type": "text",
-                            "title": "Let's talk!",
-                            "payload": "talk"
-                        },
-                        {
-                            "content_type": "text",
-                            "title": "Goodbye!",
-                            "payload": "bye"
-                        }
-                    ]
-                }
+                return responses.greeting(user.first_name);
             }
         }
 
         // users said bye.
         else if (intent[0].name == "bye") {
-            return {
-                "text": "Ok. Goodbye! 👋"
-            }
+            return responses.bye;
         }
 
         // getting compliments
         else if ((intent[0].name == "compliment")) {
-            return {
-                "text": "Thanks! You are awesome too! :)"
-            }
+            return responses.compliment;
         }
 
         // TODO
     }
 
     // out-of-scope message.
-    else return {
-        "text": `Hey, ${user.first_name}. As much as I love to discuss "${message}" with you. I am not the perfect bot yet. Maybe you should talk to human Preston Ong!`,
-        "quick_replies": [
-            {
-                "content_type": "text",
-                "title": "Let's talk!",
-                "payload": "talk"
-            },
-            {
-                "content_type": "text",
-                "title": "Goodbye!",
-                "payload": "bye"
-            }
-        ]
-    }
+    else return responses.out_of_scope(user.first_name, message);
 }
 
 /**

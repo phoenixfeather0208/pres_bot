@@ -37,9 +37,10 @@ function responseHandler(nlp_entities, message, user) {
 
         // check name first.
         if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {
-            // check name
             let name = nlp_entities.entities["name:name"][0].body.toLowerCase();
             console.log("Verify input name: " + name);
+
+            // ignore intent when incorrect name detected.
             if (!acceptableName.includes(name)) {
                 console.log("Wrong name!");
                 return {
@@ -71,12 +72,14 @@ function responseHandler(nlp_entities, message, user) {
             }
         }
 
+        // users said bye.
         else if (intent[0].name == "bye") {
             return {
                 "text": "Ok. Goodbye! 👋"
             }
         }
 
+        // getting compliments
         else if ((intent[0].name == "compliment")) {
             return {
                 "text": "Thanks! You are awesome too! :)"

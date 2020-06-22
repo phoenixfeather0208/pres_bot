@@ -55,12 +55,12 @@ function responseHandler(nlp_entities, message, user) {
                             "text": `What's up, ${user.first_name}! My favorite human! It's good to see you. 😎`,
                             "quick_replies": [
                                 {
-                                    "type": "text",
+                                    "content_type": "text",
                                     "title": "Let's talk!",
                                     "payload": "talk"
                                 },
                                 {
-                                    "type": "text",
+                                    "content_type": "text",
                                     "title": "Goodbye!",
                                     "payload": "bye"
                                 }

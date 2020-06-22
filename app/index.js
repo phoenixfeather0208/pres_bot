@@ -76,7 +76,6 @@ function handleMessage(sender_psid, received_message, sender) {
     if (received_message.text) {
         // debug
         console.log("Message received: "+received_message.text);
-
         response = nlp.response(received_message.nlp, received_message.text, sender);
     }
 
@@ -175,7 +174,26 @@ function handleQuickReplies(sender_psid, quickRepliesEvent) {
     else if (payload == "hire") {
         response =
         {
-            "text": "Hire me!"
+            "attachment": 
+            {
+                "type": "template",
+                "payload": 
+                {
+                    "template_type": "generic",
+                    "elements": [
+                        {
+                            "title" : "Hire me!",
+                            "subtitle" : "Check out my website.",
+                            "default_action": 
+                            {
+                                "type":"web_url",
+                                "url": "https://prestonongis.online/",
+                                "webview_height_ratio" : "tall"
+                            }
+                        }
+                    ]
+                }
+            }
         }
     }
     else if (payload == "intro") {

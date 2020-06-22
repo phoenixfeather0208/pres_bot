@@ -60,7 +60,7 @@ function handleAttachmentPayload(payload) {
     }
     else if (payload == "summary") {
         return {
-            "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack development, machine learning and blockchain!"
+            "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain!"
         }
     }
     else if (payload == "get_started") {

@@ -67,7 +67,21 @@ function responseHandler(nlp_entities, message, user) {
             return responses.compliment;
         }
 
-        // TODO
+        else if ((intent[0].name == "talk")) {
+            return responses.quick_reply_talk;
+        }
+
+        else if ((intent[0].name == "smile")) {
+            // CODE
+        }
+
+        else if ((intent[0].name == "intro")) {
+            return responses.quick_reply_intro;
+        }
+
+        else if ((intent[0].name == "recruit")) {
+            // CODE
+        }
     }
 
     // out-of-scope message.

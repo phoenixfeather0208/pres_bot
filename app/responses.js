@@ -103,6 +103,10 @@ module.exports = {
     {
         "text": "Hello! My name is Preston Ong. That's it for now. I will do a better job at introducing myself in the future. :P"
     },
+    smile:
+    {
+        "text": ":)"
+    },
     out_of_scope: function(name, message)
     {
         return {

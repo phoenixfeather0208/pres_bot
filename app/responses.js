@@ -76,7 +76,6 @@ module.exports = {
                     {
                         "title": "Hire me!",
                         "subtitle": "Select an option!",
-                        "image_url": "https://raw.githubusercontent.com/preston4896/preston4896.github.io/master/assets/headshot.png",
                         "buttons": [
                             {
                                 "type": "postback",

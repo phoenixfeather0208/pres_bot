@@ -72,15 +72,15 @@ function responseHandler(nlp_entities, message, user) {
         }
 
         else if ((intent[0].name == "smile")) {
-            // CODE
+            return responses.smile;
         }
 
         else if ((intent[0].name == "intro")) {
             return responses.quick_reply_intro;
         }
 
-        else if ((intent[0].name == "recruit")) {
-            // CODE
+        else if ((intent[0].name == "hire")) {
+            return responses.quick_reply_hire;
         }
     }
 

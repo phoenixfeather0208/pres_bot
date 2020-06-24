@@ -51,10 +51,7 @@ function responseHandler(nlp_entities, message, user) {
         // name accepted.
         // greet the users
         if (intent[0].name == "greet") {
-            let greetTrait = nlp_entities.traits["wit$greetings"];
-            if ((traits.includes(greetTrait)) && checkConfidence(greetTrait)) {
-                return responses.greeting(user.first_name);
-            }
+            return responses.greeting(user.first_name);
         }
 
         // users said bye.

@@ -176,3 +176,5 @@ function get_user_profile_then_respond(psid, event) {
         }
     )
 }
+
+exports.sendAPI = callSendAPI;

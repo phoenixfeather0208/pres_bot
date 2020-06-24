@@ -54,7 +54,7 @@ module.exports = {
         "quick_replies": [
             {
                 "content_type": "text",
-                "title": "Get to know Preston!",
+                "title": "Introduce yourself",
                 "payload": "intro"
             },
             {
@@ -113,7 +113,7 @@ module.exports = {
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "Let's talk!",
+                    "title": "Talk to PresBot",
                     "payload": "talk"
                 },
                 {

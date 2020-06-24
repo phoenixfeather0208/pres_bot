@@ -3,6 +3,7 @@
 // debug
 const util = require("util");
 const responses = require("./responses");
+const index = require("./index");
 
 /**
  * Handles quick reply payload and generate response.
@@ -21,6 +22,11 @@ function handleReplyPayload(payload) {
     }
     else if (payload == "intro") {
         return responses.quick_reply_intro;
+    }
+    else if (payload == "makeFun") {
+        let preston_response = responses.makeFun_preston;
+        index.sendAPI(process.env.PRESTON_PSID, preston_response);
+        return responses.quick_reply_makeFun;
     }
 }
 

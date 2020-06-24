@@ -106,6 +106,25 @@ module.exports = {
     {
         "text": ":)"
     },
+    insult:
+    {
+        "text": "You know what? I agree with you. My creator doesn't know how to code at all. Why don't we make fun of him together?",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Make fun of Preston",
+                "payload": "makeFun"
+            }
+        ]
+    },
+    quick_reply_makeFun:
+    {
+        "text": "Preston is gonna be mad lmao"
+    },
+    makeFun_preston:
+    {
+        "text": "Hey! Your user(s) think you suck at coding!"
+    },
     out_of_scope: function(name, message)
     {
         return {

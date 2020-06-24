@@ -85,6 +85,9 @@ function responseHandler(nlp_entities, message, user) {
         else if (intent[0].name == "insult") {
             return responses.insult;
         }
+        else if (intent[0].name == "user") {
+            return responses.user_talk;
+        }
     }
 
     // out-of-scope message.

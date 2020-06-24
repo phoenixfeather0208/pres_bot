@@ -61,6 +61,11 @@ module.exports = {
                 "content_type": "text",
                 "title": "Hire Preston!",
                 "payload": "hire"
+            },
+            {
+                "content_type": "text",
+                "title": "Shh... let me talk",
+                "payload": "story"
             }
         ]
     },
@@ -124,6 +129,10 @@ module.exports = {
     makeFun_preston:
     {
         "text": "Hey! Your user(s) think you suck at coding!"
+    },
+    user_talk:
+    {
+        "text": "Ok pour it out.. The floor is yours. :)"
     },
     out_of_scope: function(name, message)
     {

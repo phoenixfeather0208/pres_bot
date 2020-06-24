@@ -28,6 +28,9 @@ function handleReplyPayload(payload) {
         index.sendAPI(process.env.PRESTON_PSID, preston_response);
         return responses.quick_reply_makeFun;
     }
+    else if (payload == "story") {
+        return responses.user_talk;
+    }
 }
 
 exports.handleReplyPayload = handleReplyPayload;

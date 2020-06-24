@@ -88,6 +88,9 @@ function responseHandler(nlp_entities, message, user) {
         else if (intent[0].name == "user") {
             return responses.user_talk;
         }
+        else if (intent[0].name == "source") {
+            return responses.contribute;
+        }
     }
 
     // out-of-scope message.

@@ -79,7 +79,7 @@ module.exports = {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "Hire me!",
+                        "title": "Hire me, maybe?",
                         "subtitle": "Select an option!",
                         "buttons": [
                             {
@@ -133,6 +133,31 @@ module.exports = {
     user_talk:
     {
         "text": "Ok pour it out.. The floor is yours. :)"
+    },
+    contribute:
+    {
+        "attachment":
+        {
+            "type": "template",
+            "payload":
+            {
+                "template_type": "generic",
+                "elements":
+                    [
+                        {
+                            "title": "Contributions are welcomed!",
+                            "subtitle": "Feel free to explore source code and submit pull requests.",
+                            "buttons": [
+                                {
+                                    "type": "web_url",
+                                    "url": "https://github.com/preston4896/pres_bot",
+                                    "title": "View Repo"
+                                },
+                            ]
+                        }
+                    ]
+            }
+        }
     },
     out_of_scope: function(name, message)
     {

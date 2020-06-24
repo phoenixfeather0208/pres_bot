@@ -42,7 +42,7 @@ module.exports = {
     },
     payload_summary:
     {
-        "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain!"
+        "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
     },
     get_started:
     {
@@ -84,7 +84,7 @@ module.exports = {
                         "buttons": [
                             {
                                 "type": "postback",
-                                "title": "Quick Summary",
+                                "title": "Elevator Pitch",
                                 "payload": "summary"
                             },
                             {

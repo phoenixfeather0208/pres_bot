@@ -128,7 +128,7 @@ module.exports = {
     },
     makeFun_preston:
     {
-        "text": "Hey! Your user(s) think you suck at coding!"
+        "text": "Hey! Your user thinks you suck!"
     },
     user_talk:
     {
@@ -145,7 +145,7 @@ module.exports = {
                 "elements":
                     [
                         {
-                            "title": "Contributions are welcomed!",
+                            "title": "Contributions are appreciated!",
                             "subtitle": "Feel free to explore source code and submit pull requests.",
                             "buttons": [
                                 {

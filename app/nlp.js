@@ -91,6 +91,22 @@ function responseHandler(nlp_entities, message, user) {
         else if (intent[0].name == "source") {
             return responses.contribute;
         }
+
+        // detect user's story
+        else if (intent[0].name == "story") {
+            if (traits.includes('wit$sentiment')) {
+                // positive.
+                // CODE
+
+                // negative.
+                // CODE
+            }
+
+            else {
+                // neutral.
+                // CODE
+            }
+        }
     }
 
     // out-of-scope message.

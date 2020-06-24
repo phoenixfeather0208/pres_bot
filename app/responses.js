@@ -159,6 +159,18 @@ module.exports = {
             }
         }
     },
+    story_positive:
+    {
+
+    },
+    story_negative:
+    {
+
+    },
+    story_neutral:
+    {
+
+    },
     out_of_scope: function(name, message)
     {
         return {

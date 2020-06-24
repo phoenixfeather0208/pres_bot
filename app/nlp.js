@@ -82,6 +82,9 @@ function responseHandler(nlp_entities, message, user) {
         else if ((intent[0].name == "hire")) {
             return responses.quick_reply_hire;
         }
+        else if (intent[0].name == "summary") {
+            return responses.payload_summary;
+        }
     }
 
     // out-of-scope message.

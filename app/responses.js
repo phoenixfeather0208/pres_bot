@@ -160,16 +160,26 @@ module.exports = {
         }
     },
     story_positive:
-    {
-
-    },
+    [
+        {
+            "text": "I am so happy to hear that! :)"
+        },
+        {
+            "text": "Wow! That is awesome! :)"
+        }
+    ],
     story_negative:
-    {
-
-    },
+    [
+        {
+            "text": "I am sorry to hear that. :("
+        },
+        {
+            "text": "Oh no! That sucks. :/"
+        }
+    ],
     story_neutral:
     {
-
+        "text": "Cool story, bro! 😎"
     },
     out_of_scope: function(name, message)
     {

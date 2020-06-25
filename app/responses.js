@@ -181,6 +181,10 @@ module.exports = {
     {
         "text": "Cool story, bro! 😎"
     },
+    sad:
+    {
+        "text": ":/"
+    },
     out_of_scope: function(name, message)
     {
         return {

@@ -110,6 +110,10 @@ function responseHandler(nlp_entities, message, user) {
                 return responses.story_neutral;
             }
         }
+
+        else if (intent[0].name == "disagreement") {
+            return responses.sad;
+        }
     }
 
     // out-of-scope message.

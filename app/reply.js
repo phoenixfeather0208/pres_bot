@@ -37,22 +37,27 @@ function handleReplyPayload(payload, user) {
 
     // users want to interact with Preston.
     else if (payload == "human") {
-        timeOutID = setTimeout(() => {
-            index.sendAPI(user.id, responses.preston_deny);
-            index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
-            // // TAKE BACK CONTROL
-            // index.switchControl(user.id, true);
-        }, 30000)
-        
-        trackUser = user;
+        if (index.liveIsActive) {
+            return responses.preston_deny;
+        }
 
-        // Send the request to Preston.
-        index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
+        else {
+            timeOutID = setTimeout(() => {
+                index.sendAPI(user.id, responses.preston_deny);
+                index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
+                // // TAKE BACK CONTROL
+                // index.switchControl(user.id, true);
+            }, 30000)
 
-        // // PASS THREAD CONTROL HERE
-        // index.switchControl(user.id, false);
+            trackUser = user;
 
-        return responses.preston_request;
+            // Send the request to Preston.
+            index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
+
+            // // PASS THREAD CONTROL HERE
+            // index.switchControl(user.id, false);
+            return responses.preston_request;
+        }
     }
 
     // if Preston accepts the request - this response is only sent to Preston, not the users.
@@ -72,3 +77,4 @@ function handleReplyPayload(payload, user) {
 }
 
 exports.handleReplyPayload = handleReplyPayload;
+exports.user = trackUser;

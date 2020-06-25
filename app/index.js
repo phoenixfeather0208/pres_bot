@@ -8,6 +8,7 @@ require("dotenv").config();
 const nlp = require("./nlp");
 const attachment = require("./attachment");
 const reply = require("./reply");
+const response = require("./responses");
 
 // global variable to store user.
 var sendingAsPersona = false;
@@ -17,11 +18,6 @@ var sender_psid = -1;
 const util = require("util");
 
 app.listen(process.env.PORT || 1337, () => console.log("listening..."));
-
-// Error handling
-process.on("uncaughtException", err => {
-    console.log("Developer side error: " + err);
-})
 
 // GET REQUEST - VERIFY WEBHOOK
 app.get('/webhook', (req, res) => {
@@ -69,13 +65,7 @@ app.post('/webhook', (req, res) => {
             sender_psid = webhook_event.sender.id;
             console.log("Webhook Event: \n", util.inspect(webhook_event, false, null, true /* enable colors */));
             
-            if (sendingAsPersona) {
-                // do something else
-            }
-
-            else {
-                get_user_profile_then_respond(sender_psid, webhook_event);
-            }
+            get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
         // Returns a '200 OK' response to all requests
@@ -177,59 +167,69 @@ function get_user_profile_then_respond(psid, event) {
                 // // debug
                 // console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
 
-                // check if the event is a message or postback and pass the event to the appropiate handler function
-                if (event.message) {
-                    if (event.message.quick_reply) {
-                        handleQuickReplies(obj, event.message.quick_reply);
-                    }
-                    else {
-                        handleMessage(obj, event.message);
-                    }
+                // Human Preston is live.
+                if (sendingAsPersona && (psid == process.env.PRESTON_PSID)) {
+                    // Preston's message is sent to the user.
+                    callSendAPI(reply.user.id, event.message);
                 }
-                else if (event.postback) {
-                    handlePostback(obj, event.postback);
+
+                // BOT
+                else {
+                    // check if the event is a message or postback and pass the event to the appropiate handler function
+                    if (event.message) {
+                        if (event.message.quick_reply) {
+                            handleQuickReplies(obj, event.message.quick_reply);
+                        }
+                        else {
+                            handleMessage(obj, event.message);
+                        }
+                    }
+                    else if (event.postback) {
+                        handlePostback(obj, event.postback);
+                    }
                 }
             }
         }
     )
 }
 
-function switchThreadControl(psid, botWillBeInControl) {
-    let request_body;
-    let url;
-    if (!botWillBeInControl) {
-        request_body = {
-            "recipient": { "id": psid },
-            "target_app_id": process.env.TARGET_ID
-        }
+// function switchThreadControl(psid, botWillBeInControl) {
+//     let request_body;
+//     let url;
+//     if (!botWillBeInControl) {
+//         request_body = {
+//             "recipient": { "id": psid },
+//             "target_app_id": process.env.TARGET_ID
+//         }
 
-        url = `https://graph.facebook.com/v2.6/me/pass_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+//         url = `https://graph.facebook.com/v2.6/me/pass_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
 
-        console.log("Switching control to human...", util.inspect(request_body, false, null, true /* enable colors */));
-    }
+//         console.log("Switching control to human...", util.inspect(request_body, false, null, true /* enable colors */));
+//     }
 
-    else {
-        request_body = {
-            "recipient": { "id": psid }
-        }
+//     else {
+//         request_body = {
+//             "recipient": { "id": psid }
+//         }
 
-        url = `https://graph.facebook.com/v2.6/me/take_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+//         url = `https://graph.facebook.com/v2.6/me/take_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
 
-        console.log("Taking back control...", util.inspect(request_body, false, null, true /* enable colors */));
-    }
+//         console.log("Taking back control...", util.inspect(request_body, false, null, true /* enable colors */));
+//     }
 
-    request(
-        {
-            "url": url,
-            "method" : "POST",
-            "json": request_body
-        }, (err) => {
-            if (err) {
-                console.log("Unable to pass thread control.");
-            }
-        } 
-    )
-}
+//     request(
+//         {
+//             "url": url,
+//             "method" : "POST",
+//             "json": request_body
+//         }, (err) => {
+//             if (err) {
+//                 console.log("Unable to pass thread control.");
+//             }
+//         } 
+//     )
+// }
 
 exports.sendAPI = callSendAPI;
-exports.switchControl = switchThreadControl;
+exports.liveIsActive = sendingAsPersona;
+// exports.switchControl = switchThreadControl;

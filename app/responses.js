@@ -113,7 +113,7 @@ module.exports = {
     },
     insult:
     {
-        "text": "You know what? I agree with you. My creator doesn't know how to code at all. Why don't we make fun of him together?",
+        "text": "You know what? I agree with you. My creator doesn't know how to code at all. I can make fun of him on your behalf. Shall I proceed?",
         "quick_replies": [
             {
                 "content_type": "text",

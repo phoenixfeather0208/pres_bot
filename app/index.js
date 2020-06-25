@@ -8,7 +8,6 @@ require("dotenv").config();
 const nlp = require("./nlp");
 const attachment = require("./attachment");
 const reply = require("./reply");
-const response = require("./responses");
 
 // global variable to store user.
 var sendingAsPersona = false;
@@ -166,13 +165,9 @@ function get_user_profile_then_respond(psid, event) {
                 console.error("User Profile API error");
             }
             else {
-                //debug
-                let pretty_obj = JSON.stringify(body.body, undefined, 2);
-                console.log("\n User API: \n");
-                console.log(pretty_obj);
-                console.log("\n");
-
                 let obj = JSON.parse(body.body);
+                // debug
+                console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
 
                 // check if the event is a message or postback and pass the event to the appropiate handler function
                 if (event.message) {

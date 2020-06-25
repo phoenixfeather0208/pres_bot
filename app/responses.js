@@ -145,8 +145,8 @@ module.exports = {
                 "elements":
                     [
                         {
-                            "title": "Contributions are appreciated!",
-                            "subtitle": "Feel free to explore source code and submit pull requests.",
+                            "title": "Found a bug?",
+                            "subtitle": "Feel free to explore source code, report bugs or submit pull requests.",
                             "buttons": [
                                 {
                                     "type": "web_url",
@@ -218,7 +218,7 @@ module.exports = {
         },
         end:
         {
-            "text": "Preston ended chat session."
+            "text": "Preston has ended chat session."
         }
     },
     out_of_scope: function(name, message)

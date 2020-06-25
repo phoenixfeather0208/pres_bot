@@ -46,7 +46,7 @@ module.exports = {
     },
     get_started:
     {
-        "text": "To begin, say hi!"
+        "text": "To begin, say hi! :)"
     },
     quick_reply_talk:
     {

@@ -61,6 +61,15 @@ function handleAttachmentPayload(payload) {
     else if (payload == "get_started") {
         return responses.get_started;
     }
+    else if (payload == "contribute") {
+        return responses.contribute;
+    }
+    else if (payload == "hire") {
+        return responses.quick_reply_hire;
+    }
+    else if (payload == "intro") {
+        return responses.quick_reply_intro;
+    }
 }
 
 exports.responseAttachment = responseAttachment;

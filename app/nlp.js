@@ -3,6 +3,7 @@
 // debug
 const util = require("util");
 const responses = require("./responses");
+const index = require("./index");
 
 var confidence_threshold = 0.8;
 
@@ -16,6 +17,11 @@ var confidence_threshold = 0.8;
 function responseHandler(nlp_entities, message, user) {
     // debug
     console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
+
+    // error detection from wit.ai
+    if (nlp_entities.errors) {
+        callSendAPI(user.id, response.report_error, false);
+    }
 
     // Step 1: Variables to store entities and traits.
     let intent = nlp_entities.intents;

@@ -21,8 +21,7 @@ app.listen(process.env.PORT || 1337, () => console.log("listening..."));
 
 // Error handling
 process.on("uncaughtException", err => {
-    console.log("User notified of Uncaught exception thrown: " + err);
-    callSendAPI(sender_psid, response.report_error, false, true);
+    console.log("Developer side error: " + err);
 })
 
 // GET REQUEST - VERIFY WEBHOOK
@@ -126,7 +125,7 @@ function handleQuickReplies(user, quickRepliesEvent) {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response, persona, error) {
+function callSendAPI(sender_psid, response, persona) {
     // debug response
     console.log("Sending response: \n", util.inspect(response, false, null, true /* enable colors */));
 
@@ -154,10 +153,6 @@ function callSendAPI(sender_psid, response, persona, error) {
             console.error("Unable to send message: " + err);
         }
     })
-
-    if (error) {
-        process.exit(1);
-    }
 }
 
 // get user profile info and respond.

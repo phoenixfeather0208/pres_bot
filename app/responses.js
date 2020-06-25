@@ -208,11 +208,6 @@ module.exports = {
                         "content_type": "text",
                         "title": "Accept",
                         "payload": "accept"
-                    },
-                    {
-                        "content_type": "text",
-                        "title": "Decline",
-                        "payload": "decline"
                     }
                 ]
             }

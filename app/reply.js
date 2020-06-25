@@ -6,7 +6,6 @@ const responses = require("./responses");
 const index = require("./index");
 
 var timeOutID;
-var trackUser;
 
 /**
  * Handles quick reply payload and generate response.

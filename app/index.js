@@ -11,7 +11,8 @@ const reply = require("./reply");
 const response = require("./responses");
 
 // global variable to store user.
-var sender_psid;
+var sendingAsPersona = false;
+var sender_psid = -1;
 
 // debug
 const util = require("util");
@@ -81,14 +82,14 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(sender_psid, received_message, sender) {
+function handleMessage(user, received_message) {
     let response;
 
     // check if the message contains text
     if (received_message.text) {
         // debug
         console.log("Message received: "+received_message.text);
-        response = nlp.response(received_message.nlp, received_message.text, sender);
+        response = nlp.response(received_message.nlp, received_message.text, user);
     }
 
     else if (received_message.attachments) {
@@ -98,11 +99,11 @@ function handleMessage(sender_psid, received_message, sender) {
     }
 
     // sends the response
-    callSendAPI(sender_psid, response);
+    callSendAPI(user.id, response);
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+function handlePostback(user, received_postback) {
     let response;
 
     // get the payload for the postback
@@ -111,17 +112,17 @@ function handlePostback(sender_psid, received_postback) {
     response = attachment.handleAttachmentPayload(payload);
     
     // send the response
-    callSendAPI(sender_psid, response);
+    callSendAPI(user.id, response);
 }
 
 // Handles quick reply
-function handleQuickReplies(sender_psid, quickRepliesEvent) {
+function handleQuickReplies(user, quickRepliesEvent) {
     let response;
     let payload = quickRepliesEvent.payload;
-    response = reply.handleReplyPayload(payload, sender_psid);
+    response = reply.handleReplyPayload(payload, user);
 
     // send the response
-    callSendAPI(sender_psid, response);
+    callSendAPI(user.id, response);
 }
 
 // Sends response messages via the Send API
@@ -178,19 +179,17 @@ function get_user_profile_then_respond(psid, event) {
 
                 let obj = JSON.parse(body.body);
 
-                user = obj;
-
                 // check if the event is a message or postback and pass the event to the appropiate handler function
                 if (event.message) {
                     if (event.message.quick_reply) {
-                        handleQuickReplies(psid, event.message.quick_reply);
+                        handleQuickReplies(obj, event.message.quick_reply);
                     }
                     else {
-                        handleMessage(psid, event.message, obj);
+                        handleMessage(obj, event.message);
                     }
                 }
                 else if (event.postback) {
-                    handlePostback(psid, event.postback);
+                    handlePostback(obj, event.postback);
                 }
             }
         }
@@ -198,3 +197,4 @@ function get_user_profile_then_respond(psid, event) {
 }
 
 exports.sendAPI = callSendAPI;
+exports.persona = sendingAsPersona;

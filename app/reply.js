@@ -5,12 +5,14 @@ const util = require("util");
 const responses = require("./responses");
 const index = require("./index");
 
+var timeOutID;
+
 /**
  * Handles quick reply payload and generate response.
  * @param {string} payload
  * @returns {object} : response based on payload.
  */
-function handleReplyPayload(payload, psid) {
+function handleReplyPayload(payload, user) {
     if (payload == "talk") {
         return responses.quick_reply_talk;
     }
@@ -31,12 +33,18 @@ function handleReplyPayload(payload, psid) {
     else if (payload == "story") {
         return responses.user_talk;
     }
+
+    // users want to interact with Preston.
     else if (payload == "human") {
-        setTimeout(() => {
-            index.sendAPI(psid, responses.preston_deny);
+        timeOutID = setTimeout(() => {
+            index.sendAPI(user.id, responses.preston_deny);
         }, 15000)
+        
+        // TODO: Send a message to Preston, to which Preston must respond yes or no to kill timer.
+
         return responses.preston_request;
     }
 }
 
 exports.handleReplyPayload = handleReplyPayload;
+exports.prestonTimeOut = timeOutID;

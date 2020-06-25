@@ -40,7 +40,8 @@ function handleReplyPayload(payload, user) {
     else if (payload == "human") {
         timeOutID = setTimeout(() => {
             index.sendAPI(user.id, responses.preston_deny);
-        }, 15000)
+            index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
+        }, 30000)
         
         // Send the request to Preston.
         index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
@@ -48,10 +49,9 @@ function handleReplyPayload(payload, user) {
         return responses.preston_request;
     }
 
-    // if Preston accepts the request
+    // if Preston accepts the request - this response is only sent to Preston, not the users.
     else if (payload == "accept") {
         clearTimeout(timeOutID);
-        index.persona = true;
         // How to let user know they are connected to me?
         // also turn on sender's action.
         return responses.contact_preston.begin;

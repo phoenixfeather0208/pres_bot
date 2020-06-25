@@ -214,7 +214,7 @@ module.exports = {
         },
         begin:
         {
-            "text": "Chat session has initiated."
+            "text": "Chat session has initiated. Go to your page inbox."
         },
         end:
         {

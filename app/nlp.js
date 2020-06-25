@@ -15,8 +15,8 @@ var confidence_threshold = 0.8;
  * @returns {Object} text response
  */
 function responseHandler(nlp_entities, message, user) {
-    // debug
-    console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
+    // // debug
+    // console.log("NLP API returned: \n", util.inspect(nlp_entities, false, null, true /* enable colors */));
 
     // error detection from wit.ai
     if (nlp_entities.errors) {
@@ -45,7 +45,6 @@ function responseHandler(nlp_entities, message, user) {
         // check name first.
         if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {
             let name = nlp_entities.entities["name:name"][0].body.toLowerCase();
-            console.log("Verify input name: " + name);
 
             // ignore intent when incorrect name detected.
             if (!acceptableName.includes(name)) {

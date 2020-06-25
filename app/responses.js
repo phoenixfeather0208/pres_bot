@@ -185,6 +185,14 @@ module.exports = {
     {
         "text": ":/"
     },
+    preston_request:
+    {
+        "text": "Ok! Let me get a hold of him..."
+    },
+    preston_deny:
+    {
+        "text": "I am sorry! Preston is not available at the moment, I will make sure he gets back to you asap. :)"
+    },
     out_of_scope: function(name, message)
     {
         return {
@@ -194,6 +202,11 @@ module.exports = {
                     "content_type": "text",
                     "title": "Talk to PresBot",
                     "payload": "talk"
+                },
+                {
+                    "content_type": "text",
+                    "title": "Talk to Human",
+                    "payload": "human"
                 },
                 {
                     "content_type": "text",

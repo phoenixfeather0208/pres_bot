@@ -11,7 +11,7 @@ const reply = require("./reply");
 const response = require("./responses");
 
 // global variable to store user.
-var user;
+var sender_psid;
 
 // debug
 const util = require("util");
@@ -21,8 +21,7 @@ app.listen(process.env.PORT || 1337, () => console.log("listening..."));
 // Error handling
 process.on("uncaughtException", err => {
     console.log("User notified of Uncaught exception thrown: " + err);
-    callSendAPI(user.id, response.report_error);
-    process.exit(1);
+    callSendAPI(sender_psid, response.report_error, false, true);
 })
 
 // GET REQUEST - VERIFY WEBHOOK
@@ -68,7 +67,7 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
 
             // Get the sender's PSID
-            let sender_psid = webhook_event.sender.id;
+            sender_psid = webhook_event.sender.id;
             get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
@@ -119,14 +118,14 @@ function handlePostback(sender_psid, received_postback) {
 function handleQuickReplies(sender_psid, quickRepliesEvent) {
     let response;
     let payload = quickRepliesEvent.payload;
-    response = reply.handleReplyPayload(payload);
+    response = reply.handleReplyPayload(payload, sender_psid);
 
     // send the response
     callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response) {
+function callSendAPI(sender_psid, response, persona, error) {
     // debug response
     console.log("Sending response: \n", util.inspect(response, false, null, true /* enable colors */));
 
@@ -136,6 +135,10 @@ function callSendAPI(sender_psid, response) {
         "recipient": {"id": sender_psid},
         "message": response,
         "messaging-type": "RESPONSE"
+    }
+
+    if (persona) {
+        request_body["persona_id"] = process.env.PERSONA_ID;
     }
 
     // send the POST request to the Messenger platform
@@ -150,6 +153,10 @@ function callSendAPI(sender_psid, response) {
             console.error("Unable to send message: " + err);
         }
     })
+
+    if (error) {
+        process.exit(1);
+    }
 }
 
 // get user profile info and respond.

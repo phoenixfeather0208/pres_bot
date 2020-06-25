@@ -10,7 +10,7 @@ const index = require("./index");
  * @param {string} payload
  * @returns {object} : response based on payload.
  */
-function handleReplyPayload(payload) {
+function handleReplyPayload(payload, psid) {
     if (payload == "talk") {
         return responses.quick_reply_talk;
     }
@@ -30,6 +30,12 @@ function handleReplyPayload(payload) {
     }
     else if (payload == "story") {
         return responses.user_talk;
+    }
+    else if (payload == "human") {
+        setTimeout(() => {
+            index.sendAPI(psid, responses.preston_deny);
+        }, 15000)
+        return responses.preston_request;
     }
 }
 

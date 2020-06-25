@@ -223,7 +223,7 @@ module.exports = {
         },
         end:
         {
-            "text": "Session has ended."
+            "text": "Preston ended chat session."
         }
     },
     out_of_scope: function(name, message)

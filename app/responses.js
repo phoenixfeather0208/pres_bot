@@ -42,7 +42,7 @@ module.exports = {
     },
     payload_summary:
     {
-        "text": "I recently graduated from UC Davis, majored in C.S. with an econ minor. I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
+        "text": "Heyo! I am proud to be graduated from UC Davis. I majored in C.S. with an econ minor! I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
     },
     get_started:
     {
@@ -50,7 +50,7 @@ module.exports = {
     },
     quick_reply_talk:
     {
-        "text": "Cool! I am a great listener. What would you like to talk about?",
+        "text": "Cool! What would you like to talk about?",
         "quick_replies": [
             {
                 "content_type": "text",
@@ -79,8 +79,8 @@ module.exports = {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "Hire me, maybe?",
-                        "subtitle": "Select an option!",
+                        "title": "Hire me, maybe? 😉",
+                        "subtitle": "Select an option:",
                         "buttons": [
                             {
                                 "type": "postback",
@@ -128,11 +128,11 @@ module.exports = {
     },
     makeFun_preston:
     {
-        "text": "Hey! Your user thinks you suck!"
+        "text": "Hey! A user thinks you suck!"
     },
     user_talk:
     {
-        "text": "Ok pour it out.. The floor is yours. :)"
+        "text": "Ok pour it out.. I am a great listener and I won't judge you. You can tell me anything :)"
     },
     contribute:
     {
@@ -184,7 +184,7 @@ module.exports = {
     out_of_scope: function(name, message)
     {
         return {
-            "text": `Hey, ${name}. As much as I love to discuss "${message}" with you. I am not the perfect bot yet. Maybe you should talk to human Preston Ong!`,
+            "text": `Hey, ${name}. I am sorry but I do not understand "${message}" yet. I am not the perfect bot. Maybe you should talk to human Preston Ong!`,
             "quick_replies": [
                 {
                     "content_type": "text",

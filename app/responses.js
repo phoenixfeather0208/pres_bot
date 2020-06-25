@@ -201,6 +201,6 @@ module.exports = {
     },
     report_error:
     {
-        "text" : "Uh-oh! I am experiencing an internal error. Bleep bloop malfunctioning... Send me another message or if error persists, contact Preston."
+        "text" : "Uh-oh! I am experiencing an internal error. Send me another message or if error persists, contact Preston."
     }
 }

@@ -22,11 +22,6 @@ function responseHandler(nlp_entities, message, user) {
     let traits = [];
     let entities = [];
 
-    // catch nlp_entities error (from wit.ai's end)
-    if (intent.length === undefined) {
-        return responses.report_error;
-    }
-
     // Step 2: Fetch traits.
     for (let keys in nlp_entities.traits) {
         traits.push(nlp_entities.traits[keys]);

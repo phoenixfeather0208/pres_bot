@@ -8,11 +8,22 @@ require("dotenv").config();
 const nlp = require("./nlp");
 const attachment = require("./attachment");
 const reply = require("./reply");
+const response = require("./responses");
+
+// global variable to store user.
+var user;
 
 // debug
 const util = require("util");
 
 app.listen(process.env.PORT || 1337, () => console.log("listening..."));
+
+// Error handling
+process.on("uncaughtException", err => {
+    console.log("User notified of Uncaught exception thrown: " + err);
+    callSendAPI(user.id, response.report_error);
+    process.exit(1);
+})
 
 // GET REQUEST - VERIFY WEBHOOK
 app.get('/webhook', (req, res) => {
@@ -159,6 +170,8 @@ function get_user_profile_then_respond(psid, event) {
                 console.log("\n");
 
                 let obj = JSON.parse(body.body);
+
+                user = obj;
 
                 // check if the event is a message or postback and pass the event to the appropiate handler function
                 if (event.message) {

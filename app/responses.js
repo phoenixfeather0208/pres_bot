@@ -13,7 +13,7 @@ module.exports = {
     greeting: function(name) 
     {
         return {
-            "text": `What's up, ${name}! It's good to see you. 😎`,
+            "text": `How's it goin, ${name}! It's nice to have you here with me 😎`,
             "quick_replies": [
                 {
                     "content_type": "text",

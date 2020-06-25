@@ -194,5 +194,42 @@ function get_user_profile_then_respond(psid, event) {
     )
 }
 
+function switchThreadControl(psid, botWillBeInControl) {
+    let request_body;
+    let url;
+    if (!botWillBeInControl) {
+        request_body = {
+            "recipient": { "id": psid },
+            "target_app_id": process.env.TARGET_ID
+        }
+
+        url = `https://graph.facebook.com/v2.6/me/pass_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+
+        console.log("Switching control to human...", util.inspect(request_body, false, null, true /* enable colors */));
+    }
+
+    else {
+        request_body = {
+            "recipient": { "id": psid }
+        }
+
+        url = `https://graph.facebook.com/v2.6/me/take_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+
+        console.log("Taking back control...", util.inspect(request_body, false, null, true /* enable colors */));
+    }
+
+    request(
+        {
+            "url": url,
+            "method" : "POST",
+            "json": request_body
+        }, (err) => {
+            if (err) {
+                console.log("Unable to pass thread control.");
+            }
+        } 
+    )
+}
+
 exports.sendAPI = callSendAPI;
-exports.persona = sendingAsPersona;
+exports.switchControl = switchThreadControl;

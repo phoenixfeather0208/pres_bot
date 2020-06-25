@@ -6,6 +6,7 @@ const responses = require("./responses");
 const index = require("./index");
 
 var timeOutID;
+var trackUser;
 
 /**
  * Handles quick reply payload and generate response.
@@ -13,8 +14,6 @@ var timeOutID;
  * @returns {object} : response based on payload.
  */
 function handleReplyPayload(payload, user) {
-    trackUser = user;
-
     if (payload == "talk") {
         return responses.quick_reply_talk;
     }
@@ -41,10 +40,17 @@ function handleReplyPayload(payload, user) {
         timeOutID = setTimeout(() => {
             index.sendAPI(user.id, responses.preston_deny);
             index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
+            // // TAKE BACK CONTROL
+            // index.switchControl(user.id, true);
         }, 30000)
         
+        trackUser = user;
+
         // Send the request to Preston.
         index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
+
+        // // PASS THREAD CONTROL HERE
+        // index.switchControl(user.id, false);
 
         return responses.preston_request;
     }
@@ -52,13 +58,17 @@ function handleReplyPayload(payload, user) {
     // if Preston accepts the request - this response is only sent to Preston, not the users.
     else if (payload == "accept") {
         clearTimeout(timeOutID);
-        // How to let user know they are connected to me?
-        // also turn on sender's action.
+        index.sendAPI(trackUser.id, responses.preston_accept);
         return responses.contact_preston.begin;
     }
 
-    
+    // PRESTON ONLY
+    else if (payload == "deny") {
+        clearTimeout(timeOutID);
+        index.sendAPI(trackUser.id, responses.preston_deny);
+        return responses.contact_preston.end;
+    }
+
 }
 
 exports.handleReplyPayload = handleReplyPayload;
-exports.prestonTimeOut = timeOutID;

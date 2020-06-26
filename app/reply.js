@@ -5,8 +5,8 @@ const util = require("util");
 const responses = require("./responses");
 const index = require("./index");
 
-var timeOutID;
-var trackUser;
+// var timeOutID;
+// var trackUser;
 
 /**
  * Handles quick reply payload and generate response.
@@ -33,6 +33,21 @@ function handleReplyPayload(payload, user) {
     }
     else if (payload == "story") {
         return responses.user_talk;
+    }
+    else if (payload == "happy") {
+        index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
+        return responses.feedBackResponse[0];
+    }
+    else if (payload == "neutral") {
+        index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
+        return responses.feedBackResponse[1];
+    }
+    else if (payload == "notHappy") {
+        index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
+        return responses.feedBackResponse[2];
+    }
+    else if (payload == "exit") {
+        return responses.exit;
     }
 
     // // users want to interact with Preston.

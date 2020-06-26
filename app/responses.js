@@ -8,7 +8,57 @@ module.exports = {
     },
     bye:
     {
-        "text": "Ok. Goodbye! 👋"
+        "text": "Before you go, would you care to rate your experience with our conversation?",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "😊",
+                "payload": "happy"
+            },
+            {
+                "content_type": "text",
+                "title": "😐",
+                "payload": "neutral"
+            },
+            {
+                "content_type": "text",
+                "title": "😒",
+                "payload": "notHappy"
+            },
+            {
+                "content_type": "text",
+                "title": "I SAID GOODBYE",
+                "payload": "exit"
+            }
+        ]
+    },
+    feedBackResponse: [
+        {
+            "text": "Aww.. I enjoyed talking to you too. I hope you have a good day."
+        },
+        {
+            "text" : "Cool. Take Care. :)"
+        },
+        {
+            "text" : "I am sorry that you did not enjoy our conversation. Machines go brrrr....",
+        }
+    ],
+    receive_feedback: function(payload, name) {
+        if (payload == "happy") {
+            return {
+                "text": `${name} enjoyed our conversation.`
+            }
+        }
+        else if (payload == "neutral") {
+            return {
+                "text": `It was meh for ${name}. We can do better.`
+            }
+        }
+        else {
+            return {
+                "text": `${name} did not have fun with our conversation.`
+            }
+        }
     },
     greeting: function(name) 
     {
@@ -28,6 +78,9 @@ module.exports = {
             ]
         }
     },
+    exit: {
+        "text": "Ok, goodbye! 👋"
+    },
     compliment:
     {
         "text": "Thanks! You are awesome too! :)"
@@ -42,7 +95,7 @@ module.exports = {
     },
     payload_summary:
     {
-        "text": "Heyo! I am proud to be graduated from UC Davis. I majored in C.S. with an econ minor! I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
+        "text": "I am proud to be graduated from UC Davis. I majored in C.S. with an econ minor! I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
     },
     get_started:
     {
@@ -229,7 +282,7 @@ module.exports = {
     out_of_scope: function(name, message)
     {
         return {
-            "text": `Hey, ${name}. I am sorry but I do not understand "${message}" yet. I am not the perfect bot. Maybe you should talk to human Preston Ong!`,
+            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}". I am not the perfect bot yet.`,
             "quick_replies": [
                 {
                     "content_type": "text",

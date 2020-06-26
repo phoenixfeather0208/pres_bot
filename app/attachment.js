@@ -23,7 +23,7 @@ function responseAttachment(url, user) {
         }
         let memeURL = "https://i.imgflip.com/46dsxq.jpg";
         index.sendAPI(user.id, response);
-        return generate_template_response("image", memeURL);
+        return generate_attachment("image", memeURL);
     }
 }
 
@@ -57,7 +57,7 @@ function handleAttachmentPayload(payload) {
  * @param {string} filedata - Optional: filepath to media.
  * @returns {object} 
  */
-function generate_template_response(type, url, filedata) {
+function generate_attachment(type, url, filedata) {
     let response = {};
     if (filedata == undefined) {
         response = {
@@ -86,3 +86,4 @@ function generate_template_response(type, url, filedata) {
 
 exports.responseAttachment = responseAttachment;
 exports.handleAttachmentPayload = handleAttachmentPayload;
+exports.sendAttachment = generate_attachment;

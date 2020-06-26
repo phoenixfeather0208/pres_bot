@@ -57,9 +57,8 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
 
             // Get the sender's PSID
-            sender_psid = webhook_event.sender.id;
+            let sender_psid = webhook_event.sender.id;
             console.log("Webhook Event: \n", util.inspect(webhook_event, false, null, true /* enable colors */));
-            
             get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
@@ -129,6 +128,7 @@ function callSendAPI(sender_psid, response) {
         "messaging-type": "RESPONSE"
     }
 
+    sender_action(sender_psid, false);
 
     // send the POST request to the Messenger platform
     request(
@@ -169,16 +169,48 @@ function get_user_profile_then_respond(psid, event) {
 
                 // check if the event is a message or postback and pass the event to the appropiate handler function
                 if (event.message) {
-                    if (event.message.quick_reply) {
-                        handleQuickReplies(obj, event.message.quick_reply);
-                    }
-                    else {
-                        handleMessage(obj, event.message);
-                    }
+                    sender_action(psid, true);
+                    setTimeout(() => {
+                        if (event.message.quick_reply) {
+                            handleQuickReplies(obj, event.message.quick_reply);
+                        }
+                        else {
+                            handleMessage(obj, event.message);
+                        }
+                    }, 1500)
                 }
                 else if (event.postback) {
-                    handlePostback(obj, event.postback);
+                    sender_action(psid, true);
+                    setTimeout(() => {
+                        handlePostback(obj, event.postback);
+                    }, 1500)
                 }
+            }
+        }
+    )
+}
+
+function sender_action(sender_psid, isTyping) {
+    let typeStatus;
+    if (isTyping) {
+        typeStatus = "typing_on";
+    }
+    else {
+        typeStatus = "typing_off";
+    }
+    let request_body = {
+        "recipient" : {"id" : sender_psid},
+        "sender_action" : typeStatus
+    }
+    request(
+        {
+            "url": "https://graph.facebook.com/v7.0/me/messages",
+            "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
+            "method": "POST",
+            "json": request_body
+        }, (err, res, body) => {
+            if (err) {
+                console.error("Sender action error: " + err);
             }
         }
     )

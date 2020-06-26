@@ -3,42 +3,27 @@
 // debug
 const util = require("util");
 const responses = require("./responses");
+const index = require("./index");
 
 /**
  * Respond with a generic template based on the image url.
  * @param {string} url : attachment url.
+ * @param {object} user
  * @returns {Object} : template response.
  */
-function responseAttachment(url) {
-    return {
-        "attachment":
-        {
-            "type": "template",
-                "payload":
-            {
-                "template_type": "generic",
-                    "elements": 
-                    [
-                        {
-                            "title": "Is this the right picture?",
-                            "subtitle": "Tap a button to answer.",
-                            "image_url": url,
-                            "buttons": [
-                                {
-                                    "type": "postback",
-                                    "title": "Yes!",
-                                    "payload": "yes"
-                                },
-                                {
-                                    "type": "postback",
-                                    "title": "No!",
-                                    "payload": "no"
-                                }
-                            ]
-                        }
-                    ]
-            }
+function responseAttachment(url, user) {
+    if (url == "https://scontent.xx.fbcdn.net/v/t39.1997-6/cp0/39178562_1505197616293642_5411344281094848512_n.png?_nc_cat=1&_nc_sid=ac3552&_nc_ohc=rYS1XLwdA2cAX-lJ0eM&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=60c90b8831cb39119b379003106ec134&oe=5F1B4349") {
+        return {
+            "text": "👍"
         }
+    }
+    else {
+        let response = {
+            "text": "Sorry, I do not understand, but I have a meme for you: "
+        }
+        let memeURL = "https://i.imgflip.com/46dsxq.jpg";
+        index.sendAPI(user.id, response);
+        return generate_template_response("image", memeURL);
     }
 }
 
@@ -48,14 +33,7 @@ function responseAttachment(url) {
  * @returns {Object} : text response based on payload.
  */
 function handleAttachmentPayload(payload) {
-    // set the response based on the payload
-    if (payload == "yes") {
-        return responses.payload_yes;
-    }
-    else if (payload == "no") {
-        return responses.payload_no;
-    }
-    else if (payload == "summary") {
+    if (payload == "summary") {
         return responses.payload_summary;
     }
     else if (payload == "get_started") {
@@ -70,6 +48,40 @@ function handleAttachmentPayload(payload) {
     else if (payload == "intro") {
         return responses.quick_reply_intro;
     }
+}
+
+/**
+ * This fuctions generates a non text response.
+ * @param {string} type - Attachment type. Image, video or audio
+ * @param {string} url - Optional: url path to media.
+ * @param {string} filedata - Optional: filepath to media.
+ * @returns {object} 
+ */
+function generate_template_response(type, url, filedata) {
+    let response = {};
+    if (filedata == undefined) {
+        response = {
+            "attachment": {
+                "type": type,
+                "payload": {
+                    "url": url,
+                    "is_reusable": true
+                }
+            }
+        }
+    }
+    else if (url == "") {
+        response = {
+            "attachment": {
+                "type": type,
+                "payload": {
+                    "is_reusable": true
+                },
+                "filedata": "@/" + filedata
+            }
+        }
+    }
+    return response;
 }
 
 exports.responseAttachment = responseAttachment;

@@ -86,7 +86,7 @@ function handleMessage(user, received_message) {
     else if (received_message.attachments) {
         // Get the URL of the attachment
         let attachment_url = received_message.attachments[0].payload.url;
-        response = attachment.responseAttachment(attachment_url);
+        response = attachment.responseAttachment(attachment_url, user);
     }
 
     // sends the response

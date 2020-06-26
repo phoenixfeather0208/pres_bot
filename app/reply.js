@@ -11,6 +11,7 @@ const index = require("./index");
 /**
  * Handles quick reply payload and generate response.
  * @param {string} payload
+ * @param {object} user
  * @returns {object} : response based on payload.
  */
 function handleReplyPayload(payload, user) {

@@ -185,47 +185,47 @@ module.exports = {
     {
         "text": ":/"
     },
-    preston_request:
-    {
-        "text": "Ok! Let me get a hold of him..."
-    },
-    preston_deny:
-    {
-        "text": "I am sorry! Preston is not available at the moment, I will make sure he gets back to you asap. :)"
-    },
-    preston_accept:
-    {
-        "text": "You are now connected with Human Preston."
-    },
-    contact_preston:
-    {
-        prompt: function(name)
-        {
-            return {
-                "text": `${name} sent you a chat request.`,
-                "quick_replies": [
-                    {
-                        "content_type": "text",
-                        "title": "Accept",
-                        "payload": "accept"
-                    },
-                    {
-                        "content_type": "text",
-                        "title": "Deny",
-                        "payload": "deny"
-                    }
-                ]
-            }
-        },
-        begin:
-        {
-            "text": "Chat session has initiated."
-        },
-        end:
-        {
-            "text": "Preston has ended chat session."
-        }
-    },
+    // preston_request:
+    // {
+    //     "text": "Ok! Let me get a hold of him..."
+    // },
+    // preston_deny:
+    // {
+    //     "text": "I am sorry! Preston is not available at the moment, I will make sure he gets back to you asap. :)"
+    // },
+    // preston_accept:
+    // {
+    //     "text": "You are now connected with Human Preston."
+    // },
+    // contact_preston:
+    // {
+    //     prompt: function(name)
+    //     {
+    //         return {
+    //             "text": `${name} sent you a chat request.`,
+    //             "quick_replies": [
+    //                 {
+    //                     "content_type": "text",
+    //                     "title": "Accept",
+    //                     "payload": "accept"
+    //                 },
+    //                 {
+    //                     "content_type": "text",
+    //                     "title": "Deny",
+    //                     "payload": "deny"
+    //                 }
+    //             ]
+    //         }
+    //     },
+    //     begin:
+    //     {
+    //         "text": "Chat session has initiated."
+    //     },
+    //     end:
+    //     {
+    //         "text": "Preston has ended chat session."
+    //     }
+    // },
     out_of_scope: function(name, message)
     {
         return {
@@ -236,11 +236,11 @@ module.exports = {
                     "title": "Talk to PresBot",
                     "payload": "talk"
                 },
-                {
-                    "content_type": "text",
-                    "title": "Talk to Human",
-                    "payload": "human"
-                },
+                // {
+                //     "content_type": "text",
+                //     "title": "Talk to Human",
+                //     "payload": "human"
+                // },
                 {
                     "content_type": "text",
                     "title": "Goodbye!",

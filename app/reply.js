@@ -35,46 +35,69 @@ function handleReplyPayload(payload, user) {
         return responses.user_talk;
     }
 
-    // users want to interact with Preston.
-    else if (payload == "human") {
-        if (index.liveIsActive) {
-            return responses.preston_deny;
-        }
+    // // users want to interact with Preston.
+    // else if (payload == "human") {
+    //     // Send the request to Preston.
+    //     index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
 
-        else {
-            timeOutID = setTimeout(() => {
-                index.sendAPI(user.id, responses.preston_deny);
-                index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
-                // // TAKE BACK CONTROL
-                // index.switchControl(user.id, true);
-            }, 30000)
+    //     if (index.liveIsActive) {
+    //         return responses.preston_deny;
+    //     }
 
-            trackUser = user;
+    //     else {
+    //         timeOutID = setTimeout(() => {
+    //             index.sendAPI(user.id, responses.preston_deny);
+    //             index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.end);
+    //             // // TAKE BACK CONTROL
+    //             // index.switchControl(user.id, true);
+    //         }, 30000)
 
-            // Send the request to Preston.
-            index.sendAPI(process.env.PRESTON_PSID, responses.contact_preston.prompt(user.first_name));
+    //         trackUser = user;
 
-            // // PASS THREAD CONTROL HERE
-            // index.switchControl(user.id, false);
-            return responses.preston_request;
-        }
-    }
+    //         // // PASS THREAD CONTROL HERE
+    //         // index.switchControl(user.id, false);
+    //         return responses.preston_request;
+    //     }
+    // }
 
-    // if Preston accepts the request - this response is only sent to Preston, not the users.
-    else if (payload == "accept") {
-        clearTimeout(timeOutID);
-        index.sendAPI(trackUser.id, responses.preston_accept);
-        return responses.contact_preston.begin;
-    }
+    // // if Preston accepts the request - this response is only sent to Preston, not the users.
+    // else if (payload == "accept") {
+    //     clearTimeout(timeOutID);
+    //     index.sendAPI(trackUser.id, responses.preston_accept);
+    //     return responses.contact_preston.begin;
+    // }
 
-    // PRESTON ONLY
-    else if (payload == "deny") {
-        clearTimeout(timeOutID);
-        index.sendAPI(trackUser.id, responses.preston_deny);
-        return responses.contact_preston.end;
-    }
+    // // PRESTON ONLY
+    // else if (payload == "deny") {
+    //     clearTimeout(timeOutID);
+    //     index.sendAPI(trackUser.id, responses.preston_deny);
+    //     return responses.contact_preston.end;
+    // }
 
 }
 
+// /**
+//  * Listens for Preston's messages and then send it to the user and vice versa.
+//  * @param {Number} senderID - Preston's PSID
+//  * @param {Number} receiverID - User's PSID
+//  * @param {string} messageInput - Text message
+//  * @returns {boolean} - Switch personas.
+//  */
+// function send_message_to_user(senderID, receiverID, messageInput) {
+//     // Preston ends session.
+//     if ((senderID == process.env.PRESTON_PSID) && (messageInput == "exitChat")) {
+//         index.sendAPI(receiverID, responses.contact_preston.end, false);
+//         index.sendAPI(senderID, responses.contact_preston.end);
+//         return false;
+//     }
+
+//     else {
+//         let messageObject = {
+//             "text": messageInput
+//         }
+//         index.sendAPI(receiverID, messageObject, true);
+//         return true;
+//     }
+// }
+
 exports.handleReplyPayload = handleReplyPayload;
-exports.user = trackUser;

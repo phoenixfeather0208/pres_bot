@@ -8,11 +8,6 @@ require("dotenv").config();
 const nlp = require("./nlp");
 const attachment = require("./attachment");
 const reply = require("./reply");
-const response = require("./responses");
-
-// global variable to store user.
-var sendingAsPersona = false;
-var sender_psid = -1;
 
 // debug
 const util = require("util");
@@ -122,7 +117,7 @@ function handleQuickReplies(user, quickRepliesEvent) {
 }
 
 // Sends response messages via the Send API
-function callSendAPI(sender_psid, response, persona) {
+function callSendAPI(sender_psid, response) {
     // debug response
     console.log("Sending response: \n", util.inspect(response, false, null, true /* enable colors */));
 
@@ -134,9 +129,6 @@ function callSendAPI(sender_psid, response, persona) {
         "messaging-type": "RESPONSE"
     }
 
-    if (persona) {
-        request_body["persona_id"] = process.env.PERSONA_ID;
-    }
 
     // send the POST request to the Messenger platform
     request(
@@ -166,70 +158,30 @@ function get_user_profile_then_respond(psid, event) {
                 let obj = JSON.parse(body.body);
                 // // debug
                 // console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
+                
+                
+                // console.log("Preston is live? " + sendingAsPersona);
+                // // Human Preston is live.
+                // if ((psid == process.env.PRESTON_PSID)) {
+                //     // Preston's message is sent to the user.
+                    
+                // }
 
-                // Human Preston is live.
-                if (sendingAsPersona && (psid == process.env.PRESTON_PSID)) {
-                    // Preston's message is sent to the user.
-                    callSendAPI(reply.user.id, event.message);
+                // check if the event is a message or postback and pass the event to the appropiate handler function
+                if (event.message) {
+                    if (event.message.quick_reply) {
+                        handleQuickReplies(obj, event.message.quick_reply);
+                    }
+                    else {
+                        handleMessage(obj, event.message);
+                    }
                 }
-
-                // BOT
-                else {
-                    // check if the event is a message or postback and pass the event to the appropiate handler function
-                    if (event.message) {
-                        if (event.message.quick_reply) {
-                            handleQuickReplies(obj, event.message.quick_reply);
-                        }
-                        else {
-                            handleMessage(obj, event.message);
-                        }
-                    }
-                    else if (event.postback) {
-                        handlePostback(obj, event.postback);
-                    }
+                else if (event.postback) {
+                    handlePostback(obj, event.postback);
                 }
             }
         }
     )
 }
 
-// function switchThreadControl(psid, botWillBeInControl) {
-//     let request_body;
-//     let url;
-//     if (!botWillBeInControl) {
-//         request_body = {
-//             "recipient": { "id": psid },
-//             "target_app_id": process.env.TARGET_ID
-//         }
-
-//         url = `https://graph.facebook.com/v2.6/me/pass_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
-
-//         console.log("Switching control to human...", util.inspect(request_body, false, null, true /* enable colors */));
-//     }
-
-//     else {
-//         request_body = {
-//             "recipient": { "id": psid }
-//         }
-
-//         url = `https://graph.facebook.com/v2.6/me/take_thread_control?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
-
-//         console.log("Taking back control...", util.inspect(request_body, false, null, true /* enable colors */));
-//     }
-
-//     request(
-//         {
-//             "url": url,
-//             "method" : "POST",
-//             "json": request_body
-//         }, (err) => {
-//             if (err) {
-//                 console.log("Unable to pass thread control.");
-//             }
-//         } 
-//     )
-// }
-
 exports.sendAPI = callSendAPI;
-exports.liveIsActive = sendingAsPersona;
-// exports.switchControl = switchThreadControl;

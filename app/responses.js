@@ -282,11 +282,11 @@ module.exports = {
     out_of_scope: function(name, message)
     {
         return {
-            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}". I am not the perfect bot yet.`,
+            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}".`,
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "Talk to PresBot",
+                    "title": "Talk About Something Else",
                     "payload": "talk"
                 },
                 // {

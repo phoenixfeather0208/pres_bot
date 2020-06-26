@@ -12,14 +12,14 @@ const index = require("./index");
  * @returns {Object} : template response.
  */
 function responseAttachment(url, user) {
-    if (url == "https://scontent.xx.fbcdn.net/v/t39.1997-6/cp0/39178562_1505197616293642_5411344281094848512_n.png?_nc_cat=1&_nc_sid=ac3552&_nc_ohc=rYS1XLwdA2cAX-lJ0eM&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=60c90b8831cb39119b379003106ec134&oe=5F1B4349") {
+    if (url.includes("https://scontent.xx.fbcdn.net/")) {
         return {
             "text": "👍"
         }
     }
     else {
         let response = {
-            "text": "Sorry, I do not understand, but I have a meme for you: "
+            "text": "Sorry, I do not understand memes yet, but I have a meme for you: "
         }
         let memeURL = "https://i.imgflip.com/46dsxq.jpg";
         index.sendAPI(user.id, response);

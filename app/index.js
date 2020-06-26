@@ -177,13 +177,13 @@ function get_user_profile_then_respond(psid, event) {
                         else {
                             handleMessage(obj, event.message);
                         }
-                    }, 1500)
+                    }, 750)
                 }
                 else if (event.postback) {
                     sender_action(psid, true);
                     setTimeout(() => {
                         handlePostback(obj, event.postback);
-                    }, 1500)
+                    }, 750)
                 }
             }
         }

@@ -107,7 +107,7 @@ module.exports = {
         "quick_replies": [
             {
                 "content_type": "text",
-                "title": "Introduce yourself",
+                "title": "Get To Know Preston",
                 "payload": "intro"
             },
             {

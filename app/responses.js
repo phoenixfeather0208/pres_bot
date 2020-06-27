@@ -1,8 +1,6 @@
 "strict mode";
 
-const preston = require("./preston");
-const index = require("./index");
-
+// responses to extract.
 module.exports = {
     wrongName: 
     {
@@ -131,23 +129,28 @@ module.exports = {
             "type": "template",
             "payload":
             {
-                "template_type": "button",
-                "text": "Check out my portfolios, or ask me questions like, 'what are my top skills?' ",
-                "buttons": [
+                "template_type": "generic",
+                "elements": [
                     {
-                        "type": "postback",
-                        "title": "Elevator Pitch",
-                        "payload": "summary"
-                    },
-                    {
-                        "type": "web_url",
-                        "url": "https://prestonongis.online/",
-                        "title": "Website"
-                    },
-                    {
-                        "type": "web_url",
-                        "url": "http://github.com/preston4896",
-                        "title": "GitHub"
+                        "title": "Hire me, maybe? 😉",
+                        "subtitle": "Select an option:",
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Elevator Pitch",
+                                "payload": "summary"
+                            },
+                            {
+                                "type": "web_url",
+                                "url": "https://prestonongis.online/",
+                                "title": "Website"
+                            },
+                            {
+                                "type": "web_url",
+                                "url": "http://github.com/preston4896",
+                                "title": "GitHub"
+                            }
+                        ]
                     }
                 ]
             }
@@ -155,30 +158,7 @@ module.exports = {
     },
     quick_reply_intro:
     {
-        "text": "Hello! Even though I am a bot, I speak on behalf of Preston Ong. What would you like to know about me/him?",
-        "quick_replies": [
-            {
-                "content_type": "text",
-                "title": "Brief Intro",
-                "payload": "shortIntro"
-            },
-            {
-                "content_type": "text",
-                "title": "Interests and Hobbies",
-                "payload": "interest"
-            },
-            {
-                "content_type": "text",
-                "title": "Something Random",
-                "payload": "random"
-            },
-        ]
-    },
-    preston: {
-        // intro: {
-        //     "text": preston.longIntro
-        // },
-        // interest: index.randomOutput(preston.interest)
+        "text": "Hello! My name is Preston Ong. That's it for now. I will do a better job at introducing myself in the future. :P"
     },
     smile:
     {
@@ -325,9 +305,5 @@ module.exports = {
     report_error:
     {
         "text" : "Uh-oh! I am experiencing an internal error. Send me another message or if error persists, contact Preston."
-    },
-    feature_not_ready:
-    {
-        "text" : "Sorry, this feature is not ready yet."
     }
 }

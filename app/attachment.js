@@ -33,21 +33,25 @@ function responseAttachment(url, user) {
  * @returns {Object} : text response based on payload.
  */
 function handleAttachmentPayload(payload) {
+    console.log("handling payload...");
+    let payloadResponse = {};
     if (payload == "summary") {
-        return responses.payload_summary;
+        payloadResponse = responses.payload_summary;
     }
     else if (payload == "get_started") {
-        return responses.get_started;
+        payloadResponse =  responses.get_started;
     }
     else if (payload == "contribute") {
-        return responses.contribute;
+        payloadResponse =  responses.contribute;
     }
     else if (payload == "hire") {
-        return responses.quick_reply_hire;
+        payloadResponse =  responses.quick_reply_hire;
     }
     else if (payload == "intro") {
-        return responses.quick_reply_intro;
+        payloadResponse =  responses.quick_reply_intro;
     }
+    // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
+    return payloadResponse;
 }
 
 /**

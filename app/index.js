@@ -95,14 +95,9 @@ function handleMessage(user, received_message) {
 // Handles messaging_postbacks events
 function handlePostback(user, received_postback) {
     let response;
-
     // get the payload for the postback
     let payload = received_postback.payload;
-
     response = attachment.handleAttachmentPayload(payload);
-    
-    console.log("payload response: ", util.inspect(payload, false, null, true /* enable colors */))
-
     // send the response
     callSendAPI(user.id, response);
 }

@@ -216,4 +216,9 @@ function sender_action(sender_psid, isTyping) {
     )
 }
 
+function random_output_from_array(inArray) {
+    return inArray[Math.floor(Math.random() * (inArray.length))];
+}
+
 exports.sendAPI = callSendAPI;
+exports.randomOutput = random_output_from_array;

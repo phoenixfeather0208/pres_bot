@@ -102,11 +102,11 @@ function responseHandler(nlp_entities, message, user) {
             if (((entities.length > 0) || (traits.length > 0)) && ((checkConfidence(traits[0])))) {
                 let story_response;
                 if ((traits[0][0].value == "positive") || (entities[0][0].role == "positive")) {
-                    story_response = responses.story_positive[Math.floor(Math.random() * 2)];
+                    story_response = index.randomOutput(responses.story_positive);
                 }
 
                 else if ((traits[0][0].value == "negative") || (entities[0][0].role == "negative")) {
-                    story_response = responses.story_negative[Math.floor(Math.random() * 2)];
+                    story_response = index.randomOutput(responses.story_negative);
                 }
                 return story_response;
             }

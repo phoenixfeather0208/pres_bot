@@ -54,33 +54,19 @@ function handleAttachmentPayload(payload) {
  * This fuctions generates a non text response.
  * @param {string} type - Attachment type. Image, video or audio
  * @param {string} url - Optional: url path to media.
- * @param {string} filedata - Optional: filepath to media.
  * @returns {object} 
  */
-function generate_attachment(type, url, filedata) {
-    let response = {};
-    if (filedata == undefined) {
-        response = {
-            "attachment": {
-                "type": type,
-                "payload": {
-                    "url": url,
-                    "is_reusable": true
-                }
+function generate_attachment(type, url) {
+    let response = 
+    {
+        "attachment": {
+            "type": type,
+            "payload": {
+                "url": url,
+                "is_reusable": true
             }
         }
-    }
-    else if (url == "") {
-        response = {
-            "attachment": {
-                "type": type,
-                "payload": {
-                    "is_reusable": true
-                },
-                "filedata": "@/" + filedata
-            }
-        }
-    }
+    };
     return response;
 }
 

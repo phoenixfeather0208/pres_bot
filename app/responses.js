@@ -1,6 +1,5 @@
 "strict mode";
 
-// responses to extract.
 module.exports = {
     wrongName: 
     {
@@ -158,7 +157,27 @@ module.exports = {
     },
     quick_reply_intro:
     {
-        "text": "Hello! My name is Preston Ong. That's it for now. I will do a better job at introducing myself in the future. :P"
+        "text": "Hello! Even though I am a bot, I speak on behalf of Preston Ong. What would you like to know about me/him?",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Brief Intro",
+                "payload": "shortIntro"
+            },
+            {
+                "content_type": "text",
+                "title": "Interests and Hobbies",
+                "payload": "interest"
+            },
+            {
+                "content_type": "text",
+                "title": "Something Random",
+                "payload": "random"
+            },
+        ]
+    },
+    preston: {
+
     },
     smile:
     {
@@ -282,7 +301,7 @@ module.exports = {
     out_of_scope: function(name, message)
     {
         return {
-            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}". I am not the perfect bot yet.`,
+            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}".`,
             "quick_replies": [
                 {
                     "content_type": "text",

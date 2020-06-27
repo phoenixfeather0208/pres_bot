@@ -101,6 +101,8 @@ function handlePostback(user, received_postback) {
 
     response = attachment.handleAttachmentPayload(payload);
     
+    console.log("payload response: ", util.inspect(payload, false, null, true /* enable colors */))
+
     // send the response
     callSendAPI(user.id, response);
 }

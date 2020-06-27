@@ -54,7 +54,11 @@ function handleReplyPayload(payload, user) {
         return responses.feature_not_ready;
     }
     else if (payload == "interest") {
-        return responses.preston.interest;
+        // return responses.preston.interest;
+        return responses.feature_not_ready;
+    }
+    else if (payload == "random") {
+        return responses.feature_not_ready;
     }
 
     // // users want to interact with Preston.

@@ -18,8 +18,12 @@ function responseAttachment(url, user) {
         }
     }
     else {
+        let response = {
+            "text": "Sorry, I do not understand memes yet, but I have a meme for you: "
+        }
         let memeURL = "https://i.imgflip.com/46dsxq.jpg";
-        return generate_attachment("image", memeURL, "Sorry, I do not understand memes yet, but I have a meme for you: ");
+        index.sendAPI(user.id, response);
+        return generate_attachment("image", memeURL);
     }
 }
 
@@ -50,17 +54,9 @@ function handleAttachmentPayload(payload) {
  * This fuctions generates a non text response.
  * @param {string} type - Attachment type. Image, video or audio
  * @param {string} url - Optional: url path to media.
- * @param {string} caption - Optional: attachment text.
  * @returns {object} 
  */
-function generate_attachment(type, url, caption) {
-    if (caption != undefined) {
-        let textResponse = {
-            "text": caption
-        }
-        index.sendAPI(user.id, textResponse);
-    }
-
+function generate_attachment(type, url) {
     let response = 
     {
         "attachment": {

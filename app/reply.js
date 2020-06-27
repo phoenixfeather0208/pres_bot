@@ -50,6 +50,12 @@ function handleReplyPayload(payload, user) {
     else if (payload == "exit") {
         return responses.exit;
     }
+    else if (payload == "shortIntro") {
+        return responses.feature_not_ready;
+    }
+    else if (payload == "interest") {
+        return responses.preston.interest;
+    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

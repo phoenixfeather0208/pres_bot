@@ -1,5 +1,8 @@
 "strict mode";
 
+const preston = require("./preston");
+const index = require("./index");
+
 module.exports = {
     wrongName: 
     {
@@ -128,28 +131,23 @@ module.exports = {
             "type": "template",
             "payload":
             {
-                "template_type": "generic",
-                "elements": [
+                "template_type": "button",
+                "text": "Check out my portfolios, or ask me questions like, 'what are my top skills?' ",
+                "buttons": [
                     {
-                        "title": "Hire me, maybe? 😉",
-                        "subtitle": "Select an option:",
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Elevator Pitch",
-                                "payload": "summary"
-                            },
-                            {
-                                "type": "web_url",
-                                "url": "https://prestonongis.online/",
-                                "title": "Website"
-                            },
-                            {
-                                "type": "web_url",
-                                "url": "http://github.com/preston4896",
-                                "title": "GitHub"
-                            }
-                        ]
+                        "type": "postback",
+                        "title": "Elevator Pitch",
+                        "payload": "summary"
+                    },
+                    {
+                        "type": "web_url",
+                        "url": "https://prestonongis.online/",
+                        "title": "Website"
+                    },
+                    {
+                        "type": "web_url",
+                        "url": "http://github.com/preston4896",
+                        "title": "GitHub"
                     }
                 ]
             }
@@ -177,7 +175,10 @@ module.exports = {
         ]
     },
     preston: {
-
+        // intro: {
+        //     "text": preston.longIntro
+        // },
+        // interest: index.randomOutput(preston.interest)
     },
     smile:
     {
@@ -324,5 +325,9 @@ module.exports = {
     report_error:
     {
         "text" : "Uh-oh! I am experiencing an internal error. Send me another message or if error persists, contact Preston."
+    },
+    feature_not_ready:
+    {
+        "text" : "Sorry, this feature is not ready yet."
     }
 }

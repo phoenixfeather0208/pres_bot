@@ -9,7 +9,7 @@ module.exports = {
         fullName: "Preston Liat Sheng Ong",
         chineseName: "王列圣",
         pinyin: "wáng-liè-shèng",
-        statement: `My full name is ${fullName}, or ${chineseName} in Chinese. Pronounced: ${pinyin}.`
+        // statement: `My full name is ${this.name.fullName}, or ${this.name.chineseName} in Chinese. Pronounced: ${this.name.pinyin}.`
     },
 
     age: 
@@ -20,20 +20,34 @@ module.exports = {
             let ageDate = new Date(ageInMilliseconds);
             return Math.abs(ageDate.getFullYear() - 1970);
         },
-        birthdayStatement: `I was born on ${dob.toDateString()}`,
-        ageStatement: `I am ${getAge(dob)} years old! `
+        // birthdayStatement: `I was born on ${dob.toDateString()}`,
+        // ageStatement: `I am ${getAge(dob)} years old! `
     },
 
     origin:
     {
         country: "Malaysia",
         hometown: "Malacca Town",
-        originStatement: `I was born and raised in the beautiful town of ${hometown}, ${country}`
+        // originStatement: `I was born and raised in the beautiful town of ${hometown}, ${country}`
     },
 
     // response objects array
     interest: [
-        
+        {
+            "text": "My favorite sitcom is Friends."
+        },
+        {
+            "text": "I like swimming, running and hiking. I enjoy doing outdoor activities."
+        },
+        {
+            "text": "My favorite European country is Italy. (France comes at a close second, I swear :P)"
+        },
+        {
+            "text": "If I were not outdoors, I would be comfortably sitting on my couch, watching TV for countless hours."
+        },
+        {
+            "text": "I am a meme collector. You should check out my meme collection."
+        }
     ],
 
     // response objects array
@@ -55,5 +69,7 @@ module.exports = {
         facebook: "https://www.facebook.com/prestonong4896/",
         github: "https://github.com/preston4896",
         linkedin: "https://www.linkedin.com/in/prestonong/"
-    }
+    },
+
+    // longIntro: this.name.statement + " " + this.origin.originStatement + " " + this.age.ageStatement
 }

@@ -9,26 +9,34 @@ module.exports = {
         fullName: "Preston Liat Sheng Ong",
         chineseName: "王列圣",
         pinyin: "wáng-liè-shèng",
-        // statement: `My full name is ${this.name.fullName}, or ${this.name.chineseName} in Chinese. Pronounced: ${this.name.pinyin}.`
+        printStatement: function() {
+            return `My full name is ${this.firstName}, or ${this.chineseName} in Chinese, pronounced: ${this.pinyin}.`
+        }
     },
 
     age: 
     {
         dob: new Date(1996,9,6),
-        getAge: function(inputDOB) {
-            let ageInMilliseconds = Date.now() - inputDOB;
+        getAge: function() {
+            let ageInMilliseconds = Date.now() - this.dob;
             let ageDate = new Date(ageInMilliseconds);
             return Math.abs(ageDate.getFullYear() - 1970);
         },
-        // birthdayStatement: `I was born on ${dob.toDateString()}`,
-        // ageStatement: `I am ${getAge(dob)} years old! `
+        birthdayStatement: function() {
+            return `I was born on ${ this.dob.toDateString() }`
+        },
+        ageStatement: function() {
+            return `I am ${this.getAge()} years old! `
+        }
     },
 
     origin:
     {
         country: "Malaysia",
         hometown: "Malacca Town",
-        // originStatement: `I was born and raised in the beautiful town of ${hometown}, ${country}`
+        originStatement: function() {
+            return `I was born and raised in the beautiful town of ${this.hometown}, ${this.country}`
+        }
     },
 
     // response objects array
@@ -71,5 +79,8 @@ module.exports = {
         linkedin: "https://www.linkedin.com/in/prestonong/"
     },
 
-    // longIntro: this.name.statement + " " + this.origin.originStatement + " " + this.age.ageStatement
+    prestonBio: function() {
+        return `Hello, my name is ${this.name.firstName}, I am ${this.age.getAge()} years old, ${this.origin.originStatement}. I moved to California pursuing the American dream and wanting to make a social impact with my passion in technology.
+        Aside from my professional interest, I enjoy laughing at memes, watching tv, and spending time outdoors. Ask me about my meme collections or anything else about me. :)`
+    }
 }

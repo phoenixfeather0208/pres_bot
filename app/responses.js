@@ -1,6 +1,7 @@
 "strict mode";
 
 const preston = require("./preston");
+const index = require("./index");
 
 module.exports = {
     wrongName: 
@@ -183,7 +184,10 @@ module.exports = {
         bio: 
         {
             "text" : preston.prestonBio()
-        } 
+        },
+        interest: function() {
+            return index.randomOutput(preston.interest);
+        }
     },
     smile:
     {

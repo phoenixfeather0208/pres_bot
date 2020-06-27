@@ -55,7 +55,7 @@ function handleReplyPayload(payload, user) {
         replyPayload = responses.preston_details.bio;
     }
     else if (payload == "interest") {
-        replyPayload = responses.feature_not_ready;
+        replyPayload = responses.preston_details.interest();
     }
     else if (payload == "random") {
         replyPayload =  responses.feature_not_ready;
@@ -99,7 +99,7 @@ function handleReplyPayload(payload, user) {
     //     index.sendAPI(trackUser.id, responses.preston_deny);
     //     return responses.contact_preston.end;
     // }
-    console.log("reply payload response: ", util.inspect(replyPayload, false, null, true /* enable colors */));
+    // console.log("reply payload response: ", util.inspect(replyPayload, false, null, true /* enable colors */));
     return replyPayload;
 }
 

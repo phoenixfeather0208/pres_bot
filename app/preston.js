@@ -40,7 +40,8 @@ module.exports = {
     },
 
     // response objects array
-    interest: [
+    interest: 
+    [
         {
             "text": "My favorite sitcom is Friends."
         },
@@ -59,9 +60,15 @@ module.exports = {
     ],
 
     // response objects array
-    random: [
+    random: 
+    [
         
     ],
+
+    profession: 
+    {
+        
+    },
 
     favoriteMemesURL: [
         "https://i.imgflip.com/46dsxq.jpg",

@@ -306,7 +306,7 @@ module.exports = {
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "Talk to PresBot",
+                    "title": "Talk About Something Else",
                     "payload": "talk"
                 },
                 // {

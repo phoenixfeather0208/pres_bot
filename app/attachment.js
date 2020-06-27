@@ -2,7 +2,6 @@
 
 // debug
 const util = require("util");
-const responses = require("./responses");
 const index = require("./index");
 
 /**
@@ -33,7 +32,9 @@ function responseAttachment(url, user) {
  * @returns {Object} : text response based on payload.
  */
 function handleAttachmentPayload(payload) {
-    console.log("handling payload...");
+    const responses = require("./responses");
+    // console.log("handling payload...");
+    // console.log("Postback payload response: ", util.inspect(responses, false, null, true /* enable colors */));
     let payloadResponse = {};
     if (payload == "summary") {
         payloadResponse = responses.payload_summary;

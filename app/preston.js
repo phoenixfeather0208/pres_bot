@@ -80,7 +80,6 @@ module.exports = {
     },
 
     prestonBio: function() {
-        return `Hello, my name is ${this.name.firstName}, I am ${this.age.getAge()} years old, ${this.origin.originStatement}. I moved to California pursuing the American dream and wanting to make a social impact with my passion in technology.
-        Aside from my professional interest, I enjoy laughing at memes, watching tv, and spending time outdoors. Ask me about my meme collections or anything else about me. :)`
+        return `Hello, my name is ${this.name.firstName}, I am ${this.age.getAge()} years old, ${this.origin.originStatement()}. I moved to California pursuing the American dream and wanting to make a social impact with my passion in technology. Aside from my professional interest, I enjoy laughing at memes, watching tv, and spending time outdoors.`
     }
 }

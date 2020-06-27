@@ -1,6 +1,7 @@
 "strict mode";
 
-// responses to extract.
+const preston = require("./preston");
+
 module.exports = {
     wrongName: 
     {
@@ -112,7 +113,7 @@ module.exports = {
             },
             {
                 "content_type": "text",
-                "title": "Hire Preston!",
+                "title": "See My Portfolio",
                 "payload": "hire"
             },
             {
@@ -158,7 +159,31 @@ module.exports = {
     },
     quick_reply_intro:
     {
-        "text": "Hello! My name is Preston Ong. That's it for now. I will do a better job at introducing myself in the future. :P"
+        "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, what I do for fun, my meme collections or anything else about me. :)",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Short Intro",
+                "payload": "shortIntro"
+            },
+            {
+                "content_type": "text",
+                "title": "Interest",
+                "payload": "interest"
+            },
+            {
+                "content_type": "text",
+                "title": "Random",
+                "payload": "random"
+            }
+        ]
+    },
+    preston_details: 
+    {
+        bio: 
+        {
+            "text" : preston.prestonBio()
+        } 
     },
     smile:
     {
@@ -282,11 +307,11 @@ module.exports = {
     out_of_scope: function(name, message)
     {
         return {
-            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}".`,
+            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}". Continue?`,
             "quick_replies": [
                 {
                     "content_type": "text",
-                    "title": "Talk About Something Else",
+                    "title": "Continue",
                     "payload": "talk"
                 },
                 // {
@@ -305,5 +330,9 @@ module.exports = {
     report_error:
     {
         "text" : "Uh-oh! I am experiencing an internal error. Send me another message or if error persists, contact Preston."
+    },
+    feature_not_ready:
+    {
+        "text" : "Sorry, this feature is not ready yet."
     }
 }

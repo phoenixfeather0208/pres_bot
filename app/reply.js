@@ -15,50 +15,50 @@ const index = require("./index");
  * @returns {object} : response based on payload.
  */
 function handleReplyPayload(payload, user) {
+    let replyPayload = {};
     if (payload == "talk") {
-        return responses.quick_reply_talk;
+        replyPayload = responses.quick_reply_talk;
     }
     else if (payload == "bye") {
-        return responses.bye;
+        replyPayload =  responses.bye;
     }
     else if (payload == "hire") {
-        return responses.quick_reply_hire;
+        replyPayload =  responses.quick_reply_hire;
     }
     else if (payload == "intro") {
-        return responses.quick_reply_intro;
+        replyPayload =  responses.quick_reply_intro;
     }
     else if (payload == "makeFun") {
         let preston_response = responses.makeFun_preston;
         index.sendAPI(process.env.PRESTON_PSID, preston_response);
-        return responses.quick_reply_makeFun;
+        replyPayload =  responses.quick_reply_makeFun;
     }
     else if (payload == "story") {
-        return responses.user_talk;
+        replyPayload =  responses.user_talk;
     }
     else if (payload == "happy") {
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
-        return responses.feedBackResponse[0];
+        replyPayload =  responses.feedBackResponse[0];
     }
     else if (payload == "neutral") {
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
-        return responses.feedBackResponse[1];
+        replyPayload =  responses.feedBackResponse[1];
     }
     else if (payload == "notHappy") {
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
-        return responses.feedBackResponse[2];
+        replyPayload =  responses.feedBackResponse[2];
     }
     else if (payload == "exit") {
-        return responses.exit;
+        replyPayload =  responses.exit;
     }
     else if (payload == "shortIntro") {
-        return responses.feature_not_ready;
+        replyPayload = responses.preston_details.bio;
     }
     else if (payload == "interest") {
-        // return responses.preston.interest;
-        return responses.feature_not_ready;
+        replyPayload = responses.feature_not_ready;
     }
     else if (payload == "random") {
-        return responses.feature_not_ready;
+        replyPayload =  responses.feature_not_ready;
     }
 
     // // users want to interact with Preston.
@@ -99,7 +99,8 @@ function handleReplyPayload(payload, user) {
     //     index.sendAPI(trackUser.id, responses.preston_deny);
     //     return responses.contact_preston.end;
     // }
-
+    console.log("reply payload response: ", util.inspect(replyPayload, false, null, true /* enable colors */));
+    return replyPayload;
 }
 
 // /**

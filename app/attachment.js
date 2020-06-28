@@ -3,7 +3,6 @@
 // debug
 const util = require("util");
 const index = require("./index");
-const { response } = require("express");
 
 /**
  * Respond with a generic template based on the image url.

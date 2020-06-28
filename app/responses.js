@@ -181,13 +181,8 @@ module.exports = {
             },
             {
                 "content_type": "text",
-                "title": "Interest",
+                "title": "Fun Facts",
                 "payload": "interest"
-            },
-            {
-                "content_type": "text",
-                "title": "Random",
-                "payload": "random"
             }
         ]
     },

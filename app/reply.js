@@ -57,9 +57,6 @@ function handleReplyPayload(payload, user) {
     else if (payload == "interest") {
         replyPayload = responses.preston_details.interest();
     }
-    else if (payload == "random") {
-        replyPayload =  responses.feature_not_ready;
-    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

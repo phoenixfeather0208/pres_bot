@@ -49,27 +49,27 @@ module.exports = {
             "text": "I like swimming, running and hiking. I enjoy doing outdoor activities."
         },
         {
-            "text": "My favorite European country is Italy. (France comes at a close second, I swear :P)"
+            "text": "My favorite European country is Italy 🇮🇹. (France comes at a close second, I swear :P)"
         },
         {
-            "text": "If I were not outdoors, I would be comfortably sitting on my couch, watching TV for countless hours."
+            "text": "I was born with a congenital cataract. I went through a surgical procedure which my eyes were implanted with artificial lenses. So interestingly, human Preston is partially a bot. What an EYE-OPENING story huh? 👀"
         },
         {
             "text": "I am a meme collector. You should check out my meme collection."
         }
     ],
 
-    // response objects array
-    random: 
-    [
+    // // response objects array
+    // random: 
+    // [
         
-    ],
+    // ],
 
     profession: 
     {
         tech: 
         {
-            language: "C++, C, JavaScript, Swift, Python",
+            language: "C++, C, JavaScript, Swift and Python",
             interest: "Machine Learning, NLP, Blockchain, Full-Stack Software Development",
             stack: "ReactJS, NodeJS, NoSQL",
             languageStatement: function() {
@@ -82,7 +82,7 @@ module.exports = {
 
         education:
         {
-            grad_year: new Date(2020,5,13),
+            grad_year: new Date(2020,5,12),
             college: "University of California, Davis",
             major: "Computer Science with Econ minor",
             educationStatement: function() {
@@ -93,7 +93,7 @@ module.exports = {
         achievement:
         {
             certificate: "2019 Apple Certified Macintosh Service Exam",
-            description: "I am certified to repair all 2019 and previous Mac Computers.",
+            description: "I am certified to repair all 2019 and previous Mac Computers",
             achievementStatement: function() {
                 return `I passed the ${this.certificate}. In other words, ${this.description}! 👨‍💻`
             }

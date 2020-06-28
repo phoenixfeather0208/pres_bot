@@ -97,7 +97,7 @@ function handlePostback(user, received_postback) {
     let response;
     // get the payload for the postback
     let payload = received_postback.payload;
-    response = attachment.handleAttachmentPayload(payload);
+    response = attachment.handleAttachmentPayload(payload, user);
     // send the response
     callSendAPI(user.id, response);
 }

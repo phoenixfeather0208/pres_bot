@@ -51,12 +51,6 @@ function handleReplyPayload(payload, user) {
     else if (payload == "exit") {
         replyPayload =  responses.exit;
     }
-    else if (payload == "shortIntro") {
-        replyPayload = responses.preston_details.bio;
-    }
-    else if (payload == "interest") {
-        replyPayload = responses.preston_details.interest(user);
-    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

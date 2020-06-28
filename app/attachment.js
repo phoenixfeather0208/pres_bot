@@ -27,9 +27,10 @@ function responseAttachment(url, user) {
 /**
  * 
  * @param {string} payload 
+ * @param {object} user
  * @returns {Object} : text response based on payload.
  */
-function handleAttachmentPayload(payload) {
+function handleAttachmentPayload(payload, user) {
     const responses = require("./responses");
     // console.log("handling payload...");
     // console.log("Postback payload response: ", util.inspect(responses, false, null, true /* enable colors */));
@@ -57,6 +58,12 @@ function handleAttachmentPayload(payload) {
     }
     else if (payload == "area") {
         payloadResponse = responses.preston_details.prointerest;
+    }
+    else if (payload == "shortIntro") {
+        payloadResponse = responses.preston_details.bio;
+    }
+    else if (payload == "interest") {
+        payloadResponse = responses.preston_details.interest(user);
     }
     // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
     return payloadResponse;

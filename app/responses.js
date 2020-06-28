@@ -179,19 +179,27 @@ module.exports = {
     },
     quick_reply_intro:
     {
-        "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, my meme collections, fun facts or anything else about me. :)",
-        "quick_replies": [
+        "attachment":
+        {
+            "type": "template",
+            "payload":
             {
-                "content_type": "text",
-                "title": "Short Intro",
-                "payload": "shortIntro"
-            },
-            {
-                "content_type": "text",
-                "title": "Fun Facts",
-                "payload": "interest"
+                "template_type": "button",
+                "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, my meme collections, fun facts or anything else about me. :)",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Short Intro",
+                        "payload": "shortIntro"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Fun Facts",
+                        "payload": "interest"
+                    }
+                ]
             }
-        ]
+        }
     },
     preston_details: 
     {

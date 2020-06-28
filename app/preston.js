@@ -67,7 +67,41 @@ module.exports = {
 
     profession: 
     {
-        
+        tech: 
+        {
+            language: "C++, C, JavaScript, Swift, Python",
+            interest: "Machine Learning, NLP, Blockchain, Full-Stack Software Development",
+            stack: "ReactJS, NodeJS, NoSQL",
+            languageStatement: function() {
+                return `I am proficient in ${this.language}. Tech stack: ${this.stack}`;
+            },
+            interestStatement: function() {
+                return `My specific field of interests are: ${this.interest}`;
+            }
+        },
+
+        education:
+        {
+            grad_year: new Date(2020,5,13),
+            college: "University of California, Davis",
+            major: "Computer Science with Econ minor",
+            educationStatement: function() {
+                return `I graduated from ${this.college}, on ${this.grad_year.toDateString()}, majored in ${this.major}.`
+            }
+        },
+
+        achievement:
+        {
+            certificate: "2019 Apple Certified Macintosh Technician",
+            description: "I am certified to repair all 2019 and previous Mac Computers.",
+            achievementStatement: function() {
+                return `I am a ${this.certificate}, ${this.description}`
+            }
+        },
+
+        elevator_pitch: function() {
+            return `I am proud and happy to announce that ${this.education.educationStatement()}. I am actively seeking in the role of full-stack software engineering. Select an option, or you can ask me questions about my favorite stacks or my interest in tech.`
+        }
     },
 
     favoriteMemesURL: [

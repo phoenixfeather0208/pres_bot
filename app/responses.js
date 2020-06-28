@@ -87,17 +87,9 @@ module.exports = {
     {
         "text": "Thanks! You are awesome too! :)"
     },
-    payload_yes:
-    {
-        "text": "Thanks!"
-    },
-    payload_no:
-    {
-        "text": "Oh no! I guess I am not a good bot."
-    },
     payload_summary:
     {
-        "text": "I am proud to be graduated from UC Davis. I majored in C.S. with an econ minor! I am seeking a full-time position role in software engineering, espcially interested in full-stack, machine learning and blockchain! I am very passionate about using technology to make my life more fun and awesome. Check out my website to see my portfolio."
+        "text": preston.profession.elevator_pitch()
     },
     get_started:
     {

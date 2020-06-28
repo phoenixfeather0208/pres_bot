@@ -39,24 +39,28 @@ module.exports = {
         }
     },
 
-    // response objects array
     interest: 
     [
         {
-            "text": "My favorite sitcom is Friends."
+            text: "My favorite sitcom is Friends.",
+            imgURL: "https://media3.giphy.com/media/lPoxtQlcX30doRbHTN/giphy.gif"
         },
         {
-            "text": "I like swimming, running and hiking. I enjoy doing outdoor activities."
+            text: "I like swimming, running and hiking. I enjoy doing outdoor activities."
         },
         {
-            "text": "My favorite European country is Italy 🇮🇹. (France comes at a close second, I swear :P)"
+            text: "My favorite European country is Italy 🇮🇹. (France comes at a close second, I swear :P )"
         },
         {
-            "text": "I was born with a congenital cataract. I went through a surgical procedure which my eyes were implanted with artificial lenses. So interestingly, human Preston is partially a bot. What an EYE-OPENING story huh? 👀"
+            text: "I was born with a congenital cataract. I went through a surgical procedure which my eyes were implanted with artificial lenses. Interestingly in a way, that makes human Preston partially a bot. What an EYE-OPENING story huh? 👀"
         },
         {
-            "text": "I am a meme collector. You should check out my meme collection."
-        }
+            text: "One of my favorite dish in the world, is the signature Malaysian dish, a.k.a. Nasi Lemak! 🇲🇾",
+            imgURL: "https://1.bp.blogspot.com/_wjO9ZSr8ZTA/S8dAoPOHqwI/AAAAAAAAId4/Jzj3FesR28I/s800/SSWF-NasiLemak.jpg"
+        },
+        {
+            text: "I am a meme collector. You should check out my meme collection."
+        },
     ],
 
     // // response objects array
@@ -100,7 +104,7 @@ module.exports = {
         },
 
         elevator_pitch: function() {
-            return `I am proud and happy to announce that ${this.education.educationStatement()}. I am actively seeking in the role of full-stack software engineering. Select an option, or you can ask me questions about my favorite stacks or my interest in tech.`
+            return `I am proud and happy to announce that ${this.education.educationStatement()}. I am actively seeking in a full time position of full-stack software engineering. :)`
         }
     },
 

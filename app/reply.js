@@ -29,7 +29,7 @@ function handleReplyPayload(payload, user) {
         replyPayload =  responses.quick_reply_intro;
     }
     else if (payload == "makeFun") {
-        let preston_response = responses.makeFun_preston;
+        let preston_response = responses.makeFun_preston(user.first_name);
         index.sendAPI(process.env.PRESTON_PSID, preston_response);
         replyPayload =  responses.quick_reply_makeFun;
     }
@@ -55,7 +55,7 @@ function handleReplyPayload(payload, user) {
         replyPayload = responses.preston_details.bio;
     }
     else if (payload == "interest") {
-        replyPayload = responses.preston_details.interest();
+        replyPayload = responses.preston_details.interest(user);
     }
 
     // // users want to interact with Preston.

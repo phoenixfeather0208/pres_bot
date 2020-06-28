@@ -11,18 +11,16 @@ const index = require("./index");
  * @returns {Object} : template response.
  */
 function responseAttachment(url, user) {
+    const preston = require("./preston");
     if (url.includes("https://scontent.xx.fbcdn.net/")) {
         return {
             "text": "👍"
         }
     }
     else {
-        let response = {
-            "text": "Sorry, I do not understand memes yet, but I have a meme for you: "
-        }
-        let memeURL = "https://i.imgflip.com/46dsxq.jpg";
-        index.sendAPI(user.id, response);
-        return generate_attachment("image", memeURL);
+        let caption = "Sorry, I do not understand memes yet, but I have a meme for you: ";
+        let memeURL = index.randomOutput(preston.favoriteMemesURL);
+        return generate_attachment("image", memeURL, caption, user);
     }
 }
 
@@ -57,6 +55,9 @@ function handleAttachmentPayload(payload) {
     else if (payload == "acmt") {
         payloadResponse = responses.preston_details.achievement;
     }
+    else if (payload == "area") {
+        payloadResponse = responses.preston_details.prointerest;
+    }
     // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
     return payloadResponse;
 }
@@ -65,9 +66,17 @@ function handleAttachmentPayload(payload) {
  * This fuctions generates a non text response.
  * @param {string} type - Attachment type. Image, video or audio
  * @param {string} url - Optional: url path to media.
+ * @param {string} caption - Optional: text caption.
+ * @param {object} user - Input user.
  * @returns {object} 
  */
-function generate_attachment(type, url) {
+function generate_attachment(type, url, caption, user) {
+    if ((caption != undefined) && (user != undefined)) {
+        let textResponse = {
+            "text": caption
+        }
+        index.sendAPI(user.id, textResponse);
+    }
     let response = 
     {
         "attachment": {
@@ -78,6 +87,7 @@ function generate_attachment(type, url) {
             }
         }
     };
+    // console.log("Attachment response: \n", util.inspect(response, false, null, true /* enable colors */))
     return response;
 }
 

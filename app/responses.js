@@ -2,6 +2,8 @@
 
 const preston = require("./preston");
 const index = require("./index");
+const attachment = require("./attachment");
+const util = require("util");
 
 module.exports = {
     wrongName: 
@@ -65,7 +67,7 @@ module.exports = {
     greeting: function(name) 
     {
         return {
-            "text": `How's it goin, ${name}! It's nice to have you here with me 😎`,
+            "text": `How's it goin, ${name}! It's nice to see you here with me 😎`,
             "quick_replies": [
                 {
                     "content_type": "text",
@@ -101,6 +103,11 @@ module.exports = {
                         "type" : "postback",
                         "title" : "Programming Languages",
                         "payload" : "prolang"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Areas of Interest",
+                        "payload": "area"
                     },
                     {
                         "type": "postback",
@@ -172,7 +179,7 @@ module.exports = {
     },
     quick_reply_intro:
     {
-        "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, what I do for fun, my meme collections or anything else about me. :)",
+        "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, my meme collections, fun facts or anything else about me. :)",
         "quick_replies": [
             {
                 "content_type": "text",
@@ -192,12 +199,24 @@ module.exports = {
         {
             "text" : preston.prestonBio()
         },
-        interest: function() {
-            return index.randomOutput(preston.interest);
+        interest: function(user) {
+            let randomObject = index.randomOutput(preston.interest);
+            if (randomObject.imgURL === undefined) {
+                return {
+                    "text": randomObject.text
+                }
+            }
+            else {
+                return attachment.sendAttachment("image", randomObject.imgURL, randomObject.text, user);
+            }
         },
         prolang: 
         {
             "text" : preston.profession.tech.languageStatement()
+        },
+        prointerest:
+        {
+            "text" : preston.profession.tech.interestStatement()
         },
         achievement:
         {
@@ -223,9 +242,10 @@ module.exports = {
     {
         "text": "Preston is gonna be mad lmao"
     },
-    makeFun_preston:
-    {
-        "text": "Hey! A user thinks you suck!"
+    makeFun_preston: function(name){
+        return {
+            "text": `Hey man! ${name} thinks you suck!`
+        }
     },
     user_talk:
     {

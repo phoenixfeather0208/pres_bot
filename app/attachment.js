@@ -3,6 +3,7 @@
 // debug
 const util = require("util");
 const index = require("./index");
+const { response } = require("express");
 
 /**
  * Respond with a generic template based on the image url.
@@ -50,6 +51,12 @@ function handleAttachmentPayload(payload) {
     }
     else if (payload == "intro") {
         payloadResponse =  responses.quick_reply_intro;
+    }
+    else if (payload == "prolang") {
+        payloadResponse = responses.preston_details.prolang;
+    }
+    else if (payload == "acmt") {
+        payloadResponse = responses.preston_details.achievement;
     }
     // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
     return payloadResponse;

@@ -92,10 +92,10 @@ module.exports = {
 
         achievement:
         {
-            certificate: "2019 Apple Certified Macintosh Technician",
+            certificate: "2019 Apple Certified Macintosh Service Exam",
             description: "I am certified to repair all 2019 and previous Mac Computers.",
             achievementStatement: function() {
-                return `I am a ${this.certificate}, ${this.description}`
+                return `I passed the ${this.certificate}. In other words, ${this.description}! 👨‍💻`
             }
         },
 

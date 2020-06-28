@@ -89,7 +89,27 @@ module.exports = {
     },
     payload_summary:
     {
-        "text": preston.profession.elevator_pitch()
+        "attachment":
+        {
+            "type" : "template",
+            "payload" : 
+            {
+                "template_type" : "button",
+                "text": preston.profession.elevator_pitch(),
+                "buttons" : [
+                    {
+                        "type" : "postback",
+                        "title" : "Programming Languages",
+                        "payload" : "prolang"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Achievement",
+                        "payload": "acmt"
+                    }
+                ]
+            }
+        }
     },
     get_started:
     {
@@ -179,6 +199,14 @@ module.exports = {
         },
         interest: function() {
             return index.randomOutput(preston.interest);
+        },
+        prolang: 
+        {
+            "text" : preston.profession.tech.languageStatement()
+        },
+        achievement:
+        {
+            "text" : preston.profession.achievement.achievementStatement()
         }
     },
     smile:

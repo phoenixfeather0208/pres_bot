@@ -263,6 +263,7 @@ module.exports = {
         },
         url: function(location) {
             let checkURL = preston.url[location];
+            // console.log("checkURL: " + checkURL);
             if (checkURL === undefined) {
                 return {
                     "text" : `Preston is not reachable on ${location}.`

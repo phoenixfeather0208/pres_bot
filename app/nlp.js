@@ -38,6 +38,8 @@ function responseHandler(nlp_entities, message, user) {
         entities.push(nlp_entities.entities[keys]);
     }
 
+    // console.log("Entities: \n", util.inspect(nlp_entities, false, null, true /* enable colors */))
+
     // Step 4: Respond appropriately based on intent.
     if ((intent.length > 0) && (intent[0].confidence >= confidence_threshold)) {
         let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣" ,"bro", "dude", "man", "chinito", "you", "ongo"];
@@ -123,6 +125,15 @@ function responseHandler(nlp_entities, message, user) {
 
         else if (intent[0].name == "interest") {
             return responses.preston_details.interest(user);
+        }
+
+        else if ((intent[0].name == "url")) {
+            if ((nlp_entities.entities["personal:socialMedia"] !== undefined)) {
+                let requestedSite = nlp_entities.entities["personal:socialMedia"][0].value.toLowerCase();
+                // console.log("requested site: " + requestedSite);
+                return responses.preston_details.url(requestedSite);
+            }
+            else return responses.out_of_scope(user.first_name, message);
         }
     }
 

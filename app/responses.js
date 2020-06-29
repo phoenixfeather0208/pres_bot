@@ -366,6 +366,9 @@ module.exports = {
         ];
         return returnObj;
     },
+    confidement: {
+        "text" : "Your secret is safe with me. Preston does not have direct access to this conversation on the Messenger app. He promised to not abuse his power as the creator to eavesdrop on our conversation by accessing my server log."
+    },
     // preston_request:
     // {
     //     "text": "Ok! Let me get a hold of him..."

@@ -99,7 +99,7 @@ function responseHandler(nlp_entities, message, user) {
 
             // detect user's story
             else if (intent[0].name == "story") {
-                if (((entities.length > 0) || (traits.length > 0)) && ((checkConfidence(traits[0])))) {
+                if (((entities.length > 0) || (traits.length > 0)) && ((checkConfidence(traits[0])) || (checkConfidence(entities[0])))) {
                     let story_response;
                     if ((traits[0][0].value == "positive") || (entities[0][0].role == "positive")) {
                         story_response = index.randomOutput(responses.story_positive);
@@ -151,6 +151,10 @@ function responseHandler(nlp_entities, message, user) {
 
             else if ((intent[0].name == "age")) {
                 return responses.preston_details.age;
+            }
+
+            else if ((intent[0].name == "confidement")) {
+                return responses.confidement;
             }
         }
 

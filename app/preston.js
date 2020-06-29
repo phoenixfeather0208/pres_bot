@@ -51,7 +51,7 @@ module.exports = {
         },
         {
             text: "I like swimming, running and hiking. I enjoy doing outdoor activities. Here's a picture of me by the beautiful Lake Berryessa, California.",
-            imgURL: "https://lh6.googleusercontent.com/kaDQztTIaSF8t6oTO1AmeYAKyJLk_ITyHq-fd-Ibty7Cmcgo8msf_uhYyiqfYcZFNXNLgwJAdZwMkZRudiBa=w1849-h949-rw"
+            imgURL: "https://lh3.googleusercontent.com/yPX1SyLTu0a4-8KVZtB87viFxMncTPlu2whYtoGeBUjxQzHU9-sEkpwnH_HpLgUtzPVFXKMvoz90PCNSmSsWPY4nCCZ1br7sNFGDGhKmzKPOWFqC4ZnttGL5xa8pOGxSZGeArqetVGRMkot9ZN7V_t9gNRr3Az2_EHWOKWvOb0Y4evkSw041XQjPBEknVe_czZDQfTOY2UTCjnuoRvriSNz62zkssI4ybegwsgGIXLuG5lMxFnWWORKOFPmqCxKMzeXahOnxPEmLH_4tjAFzsYHBAzqsHfLSFQcpzyWjN-cjAx_fdl_vN9-ZXI820b9Mi2hc9qqvP8e67cdo9iYZPW5uxo3tC87LzPx4TgQQf9PCrXzmE4PLf21kec0-JjZlpVzv3yDnDAWHqauoEqjuJksRriYu7O0bYI92MXk7pMX9CKxyfKCU2vo35S7SVuWHMj9UY4PXaOEp-uFY4Sqk0ojj64zURljVyKoZ94w-SeiQrCs1X8_66_hU496axhmK0BUDXdFI_ic_HIQyq8mtwGiM1dSrbo7BWFWYTSMmqcFlhKXW85Z-YMdMh1xUNAHzN1_KjPdPGX4OAocnwTZfMI7jwrHz9dTDloa4d8gd4SDlUwSbth-OPDsiR4x_Q_Yq3VWXv1vzxT9zVfiG51ntMPZiLWyoAjEjXF0uV6dJBCXnGnXFWCPuJrgdSKNI-Lqu_jda=w3000-h6495-ft"
         },
         {
             text: "My favorite European country is Italy 🇮🇹. (France comes at a close second, I swear :P )",

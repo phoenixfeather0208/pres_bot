@@ -211,9 +211,6 @@ module.exports = {
             let randomObject = index.randomOutput(preston.interest);
             let returnObj = {};
             if (randomObject.imgURL === undefined) {
-                // return {
-                //     "text": randomObject.text
-                // }
                 returnObj = {"text": randomObject.text};
             }
             else {
@@ -239,6 +236,43 @@ module.exports = {
         achievement:
         {
             "text" : preston.profession.achievement.achievementStatement()
+        },
+        name: 
+        {
+            "text" : preston.name.printStatement()
+        },
+        birthday:
+        {
+            "text" : preston.age.birthdayStatement()
+        },
+        age:
+        {
+            "text" : preston.age.ageStatement()
+        },
+        hometown:
+        {
+            "text" : preston.origin.originStatement()
+        },
+        ethnicity:
+        {
+            "text" : preston.origin.ethnicityStatement()
+        },
+        education:
+        {
+            "text" : preston.profession.education.educationStatement()
+        },
+        url: function(location) {
+            let checkURL = preston.url[location];
+            if (checkURL === undefined) {
+                return {
+                    "text" : `Preston is not reachable on ${location}.`
+                }
+            }
+            else {
+                return {
+                    "text" : checkURL
+                }
+            }
         }
     },
     smile:

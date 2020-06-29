@@ -84,9 +84,6 @@ function responseHandler(nlp_entities, message, user) {
         else if ((intent[0].name == "hire")) {
             return responses.quick_reply_hire;
         }
-        else if (intent[0].name == "summary") {
-            return responses.payload_summary;
-        }
         else if (intent[0].name == "insult") {
             return responses.insult;
         }
@@ -118,6 +115,14 @@ function responseHandler(nlp_entities, message, user) {
 
         else if (intent[0].name == "disagreement") {
             return responses.sad;
+        }
+
+        else if (intent[0].name == "meme") {
+            return responses.meme();
+        }
+
+        else if (intent[0].name == "interest") {
+            return responses.preston_details.interest(user);
         }
     }
 

@@ -1,7 +1,5 @@
 "strict mode";
 
-const attachment = require("./attachment");
-
 module.exports = {
     name:
     {
@@ -58,7 +56,7 @@ module.exports = {
             imgURL: "https://lh3.googleusercontent.com/cuOBwdBNSiUs5b9GRrJ3LXoDx6CITlhFDBIbFQsp6ShjPZtiCm-bp7d9jMrZaPTDshllVxcQKflsCuR6Huvd1V-KNEstiC7HZuDK3DCMvT06o02X3nx6cfiqfOO9o-UNJ1rfGga70OaVHtMBQDZI_5QCcgAXqo0a5G5t5d5FFqcA12-75kyQPNZPclwzLIJOvQrQS1onlIAmo85hmPt0QerpGZf_RimU2ORGEXReqGsrnNNcGYnL3iO2sdzb3x1EgopbDRPFF-TfSRU_SiEdg7z7drYoGTtq9ifuRwVwMEXryfUTQVX6Uia6vkFB7QqupG1RWIfV5it0LwNWeQCEy7fPVb5QNqhduCH4MZ4S76I_EW1DaeLm2MsSbAgbkoyFLXduY117oUADcEO61kZxzPaUyaMEvVfWDHkngw-NpzNPjQHrHJ7eZcMThh1hznBCjyTrOPZXlVBUrQH8R3alSEav2oMXn2u6Z6zlUVXHAwAg8OZMCZvhUFbaiKBHvsS2KdlkhgtC0W9MNgb0-2O_wxurpAsmjiVL_bHr-aQjlk9NcGSjLcUmVqk7Q_xBl8_uyhPSaz56P8N8XlPtmsEThBFJfaoCbqhMRU07f8ulDCqY71fIPErwojbNcQfEeDs9cqy69IKRtdV1SDPjyd10ksl6Yw_w43Txdw6xe1q3eo9Whqh_AmkyOxqjKhML4A_O1FxZ=w1849-h949-ft"
         },
         {
-            text: "I was born with congenital cataract. For that, I went through a surgical procedure which my eyes were implanted with artificial lenses. Interestingly in a way, that makes human Preston partially a bot. What an EYE-OPENING story huh? 👀"
+            text: "I was born with congenital cataract. I went through a surgical procedure which my eyes were implanted with artificial lenses. Interestingly in a way, that makes human Preston partially a bot. What an EYE-OPENING story huh? 👀"
         },
         {
             text: "One of my favorite dish in the world, is the signature Malaysian dish, a.k.a. Nasi Lemak! 🇲🇾",
@@ -68,14 +66,14 @@ module.exports = {
             text: "I am a meme collector. You should ask me to send memes."
         },
         {
-            text: "Because of my condition with my eyes, I am constantly taking extra measures to maintain the wellness of my vision. Funny thing though, I also work with computers almost 24/7. Computers has been proven that it could be detrimental to the human eye after prolonged exposure. What an EYE-rony huh? 👀"
+            text: "Because of the condition with my eyes, I am constantly taking extra measures to maintain the wellness of my vision. Funny thing though, I also work with computers almost 24/7, which has been proven that it could be detrimental to the human eye after prolonged exposure. Maybe I should switch careers huh? What an EYE-rony! 👀"
         },
         {
             text: "I have absolutely zero fear of heights. In fact, I hope to plan a trip to skydiving one day. This is a picture of me on top of the world's tallest building, Burj Khalifa, in Dubai. 800 meters (or 2600 ft) above ground.",
             imgURL: "https://lh3.googleusercontent.com/0oA7GUkrTXgw0fV88LL_Na7X2n383I5RIO-VQejT_5yqAvae7c66nFy7w3ls_t8tg_Om1E526kOT-Y9iQaBR_5rHgyEpKHplXvTfWI1rrdzgQWYqIB4HMAdm3MY5EOpv-K1tVXcv57xwEQ_ppMUpYSHGXcuOAy_2ksFMyn3ivzUuUesVwKltWbtdw3aBjTcFq2DbRSnSvKJNqegNgHi8a6ZZlX56yDqMb_go73xSi1qQQW2vMOHTQztxvEpPt41Q3-T6-aqHlrrMhx9Q2woxEE0lAqCQos6tCc4Ficx5gZiB2gUps5fVj4ToV25KXq2GGHB9IVoc_Px-leZgAx1r3O5jP3cQKjIowNUUMeOwcfXSXsM1a2i56d5YKvAVU8fNAYdL5E8spI8rQgPx0nbQ7sJSvEU9wYiRyZEpy7C1l03yjMhn398lNX9zjaNPxjAnXzdh5peGNgZ9ifXhucG6SUZ85Xagp3HLkVE8cxrHE6s0wZoxJ__v9k8otvS-QQBzDIQbMUTC-ua9L-aPB2ongwT5WRJ6Leh8BCNXi4EioRFTSocpFsIIltP1xbLlyw1_9o5DIVo-EckVzxSzKXrT2D8Cupobb69CvykrNT55yh5blr4myBCluqTqfkC5mYPYU08PCNTy-oWSoGZHvsAeJ9TmVAE6U-5lewu7wOD1stXM9fz0aSOoKbE3Fysrn4y4e1Pv=w1543-h949-ft"
         },
         {
-            text: "My lucky number is 4896, you might have noticed the numbers are included in most of my social media handles. If you say the numbers 4896 out loud in the Chinese dialect of Hokkien (pronounced: see-bae-gow-lut), it is said to describe an object, a person or an activity to be really 'awesome' or 'epic'. Most Chinese Malaysians (or Taiwanese) immediately understood the numbers, because that's how 4896 it is. Another example you can say is, 'I got promoted and I am going to get paid 4896-ly???' (Ok it sounds way better if this were in Chinese, I swear lol)"
+            text: "My lucky number is 4896, you might have noticed the numbers in most of my social media handles. If you say the numbers 4896 out loud in the Chinese dialect of Hokkien (pronounced: see-bae-gow-lut), it is said to describe an object, a person, an action (pretty much anything) to be really 'awesome' or 'epic' (can also be used negatively, for example, when things turn to s**t). Most Chinese Malaysians (or Taiwanese) immediately understood the numbers, because that's how 4896 it is. Another example you can say is, 'I got promoted and I am going to get paid 4896-ly???' (Ok it sounds way better if this were in Chinese, I swear lol)"
         },
         {
             text: "I travel a lot. The only continents left that I am yet to be visiting are Africa and South America. ✈️"

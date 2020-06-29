@@ -51,6 +51,12 @@ function handleReplyPayload(payload, user) {
     else if (payload == "exit") {
         replyPayload =  responses.exit;
     }
+    else if (payload == "memes") {
+        replyPayload = responses.meme();
+    }
+    else if (payload == "facts") {
+        replyPayload = responses.preston_details.interest(user);
+    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

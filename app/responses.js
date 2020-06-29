@@ -209,14 +209,24 @@ module.exports = {
         },
         interest: function(user) {
             let randomObject = index.randomOutput(preston.interest);
+            let returnObj = {};
             if (randomObject.imgURL === undefined) {
-                return {
-                    "text": randomObject.text
-                }
+                // return {
+                //     "text": randomObject.text
+                // }
+                returnObj = {"text": randomObject.text};
             }
             else {
-                return attachment.sendAttachment("image", randomObject.imgURL, randomObject.text, user);
+                returnObj = attachment.sendAttachment("image", randomObject.imgURL, randomObject.text, user);
             }
+            returnObj["quick_replies"] = [
+                {
+                    "content_type": "text",
+                    "title": "More Facts",
+                    "payload": "facts"
+                }
+            ];
+            return returnObj;
         },
         prolang: 
         {
@@ -310,7 +320,16 @@ module.exports = {
         "text": ":/"
     },
     meme: function() {
-        return attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
+        // return attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
+        let returnObj = attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
+        returnObj["quick_replies"] = [
+            {
+                "content_type": "text",
+                "title": "More Memes",
+                "payload": "memes"
+            }
+        ];
+        return returnObj;
     },
     // preston_request:
     // {

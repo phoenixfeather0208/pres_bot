@@ -46,7 +46,7 @@ module.exports = {
     interest: 
     [
         {
-            text: "My favorite sitcom is Friends.",
+            text: "My favorite sitcom of all time is Friends. Hands down!",
             imgURL: "https://media3.giphy.com/media/lPoxtQlcX30doRbHTN/giphy.gif"
         },
         {
@@ -71,7 +71,7 @@ module.exports = {
             text: "Because of my condition with my eyes, I am constantly taking extra measures to maintain the wellness of my vision. Funny thing though, I also work with computers almost 24/7. Computers has been proven that it could be detrimental to the human eye after prolonged exposure. What an EYE-rony huh? 👀"
         },
         {
-            text: "I have absolutely zero fear of heights. In fact, I hope to plan a trip to skydiving one day. This is a picture of me on top of the world's tallest building, Burj Khalifa, in Dubai. 800 meters (or 2600 ft in American) above ground.",
+            text: "I have absolutely zero fear of heights. In fact, I hope to plan a trip to skydiving one day. This is a picture of me on top of the world's tallest building, Burj Khalifa, in Dubai. 800 meters (or 2600 ft) above ground.",
             imgURL: "https://lh3.googleusercontent.com/0oA7GUkrTXgw0fV88LL_Na7X2n383I5RIO-VQejT_5yqAvae7c66nFy7w3ls_t8tg_Om1E526kOT-Y9iQaBR_5rHgyEpKHplXvTfWI1rrdzgQWYqIB4HMAdm3MY5EOpv-K1tVXcv57xwEQ_ppMUpYSHGXcuOAy_2ksFMyn3ivzUuUesVwKltWbtdw3aBjTcFq2DbRSnSvKJNqegNgHi8a6ZZlX56yDqMb_go73xSi1qQQW2vMOHTQztxvEpPt41Q3-T6-aqHlrrMhx9Q2woxEE0lAqCQos6tCc4Ficx5gZiB2gUps5fVj4ToV25KXq2GGHB9IVoc_Px-leZgAx1r3O5jP3cQKjIowNUUMeOwcfXSXsM1a2i56d5YKvAVU8fNAYdL5E8spI8rQgPx0nbQ7sJSvEU9wYiRyZEpy7C1l03yjMhn398lNX9zjaNPxjAnXzdh5peGNgZ9ifXhucG6SUZ85Xagp3HLkVE8cxrHE6s0wZoxJ__v9k8otvS-QQBzDIQbMUTC-ua9L-aPB2ongwT5WRJ6Leh8BCNXi4EioRFTSocpFsIIltP1xbLlyw1_9o5DIVo-EckVzxSzKXrT2D8Cupobb69CvykrNT55yh5blr4myBCluqTqfkC5mYPYU08PCNTy-oWSoGZHvsAeJ9TmVAE6U-5lewu7wOD1stXM9fz0aSOoKbE3Fysrn4y4e1Pv=w1543-h949-ft"
         },
         {

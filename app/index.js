@@ -8,7 +8,7 @@ require("dotenv").config();
 const nlp = require("./nlp");
 const attachment = require("./attachment");
 const reply = require("./reply");
-const seedRandom = require("seedrandom");
+// const seedRandom = require("seedrandom");
 
 // debug
 const util = require("util");
@@ -215,8 +215,9 @@ function sender_action(sender_psid, isTyping) {
 }
 
 function random_output_from_array(inArray) {
-    // set random seed.
-    seedRandom();
+    // // set random seed.
+    // let seed = seedRandom();
+    // // console.log("seed:" + seed());
     let returnedIndex = Math.floor(Math.random() * (inArray.length));
     return inArray[returnedIndex];
 }

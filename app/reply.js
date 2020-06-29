@@ -57,6 +57,9 @@ function handleReplyPayload(payload, user) {
     else if (payload == "facts") {
         replyPayload = responses.preston_details.interest(user);
     }
+    else if (payload == "contribute") {
+        replyPayload = responses.contribute;
+    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

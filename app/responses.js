@@ -432,7 +432,14 @@ module.exports = {
     },
     report_error:
     {
-        "text" : "Uh-oh! I am experiencing an internal error. Send me another message or if error persists, contact Preston."
+        "text" : "Uh-oh! I am experiencing an internal error. You can send me a meme, or another message. If error persists, contact Preston.",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Report This Issue",
+                "payload": "contribute"
+            }
+        ]
     },
     feature_not_ready:
     {

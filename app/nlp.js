@@ -40,7 +40,7 @@ function responseHandler(nlp_entities, message, user) {
 
     // Step 4: Respond appropriately based on intent.
     if ((intent.length > 0) && (intent[0].confidence >= confidence_threshold)) {
-        let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣" ,"bro", "dude", "man", "chinito", "you"];
+        let acceptableName = ["preston", "preston ong", "presbot", "preston ong liat sheng", "preston liat sheng ong", "王列聖", "王列圣", "列聖", "列圣" ,"bro", "dude", "man", "chinito", "you", "ongo"];
 
         // check name first.
         if ((entities.length != 0) && (entities.includes(nlp_entities.entities["name:name"]))) {

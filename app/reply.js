@@ -31,7 +31,7 @@ function handleReplyPayload(payload, user) {
     else if (payload == "makeFun") {
         let preston_response = responses.makeFun_preston(user.first_name);
         index.sendAPI(process.env.PRESTON_PSID, preston_response);
-        replyPayload =  responses.quick_reply_makeFun;
+        replyPayload =  responses.quick_reply_makeFun(user);
     }
     else if (payload == "story") {
         replyPayload =  responses.user_talk;

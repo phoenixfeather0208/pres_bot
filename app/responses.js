@@ -185,7 +185,7 @@ module.exports = {
             "payload":
             {
                 "template_type": "button",
-                "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, fun facts or anything else about me. :)",
+                "text": "Although I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, fun facts or anything else about me. :)",
                 "buttons": [
                     {
                         "type": "postback",
@@ -246,9 +246,8 @@ module.exports = {
             }
         ]
     },
-    quick_reply_makeFun:
-    {
-        "text": "Preston is gonna be mad lmao"
+    quick_reply_makeFun: function(user) {
+        return attachment.sendAttachment("image", "https://i.kym-cdn.com/entries/icons/original/000/032/468/snape.jpg", "Lmao! Preston be like this...", user);
     },
     makeFun_preston: function(name){
         return {

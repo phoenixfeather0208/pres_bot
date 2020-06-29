@@ -11,10 +11,7 @@ Built for fun. This project is really meant for Preston to explore applications 
 
 This project is still under development, and will be made live as soon as possible.
 
-## Prerequisite:
-You must install all dependencies to run this app on your local machine. Run `$ yarn install`.
-
 ## Instruction To Use:
 To be added.
 
-Last updated: June 23th, 2020.
+Last updated: June 29th, 2020.

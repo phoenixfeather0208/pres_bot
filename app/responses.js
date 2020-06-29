@@ -44,7 +44,7 @@ module.exports = {
             "text" : "Cool. Take Care. :)"
         },
         {
-            "text" : "I am sorry that you did not enjoy our conversation. Machines go brrrr....",
+            "text" : "I am sorry that you did not enjoy our conversation. Machines go brrrr...."
         }
     ],
     receive_feedback: function(payload, name) {
@@ -67,7 +67,7 @@ module.exports = {
     greeting: function(name) 
     {
         return {
-            "text": `How's it goin, ${name}! It's nice to see you here with me 😎`,
+            "text": `How's it goin, ${name}! It's nice to see you! 😎`,
             "quick_replies": [
                 {
                     "content_type": "text",
@@ -185,7 +185,7 @@ module.exports = {
             "payload":
             {
                 "template_type": "button",
-                "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions like, my meme collections, fun facts or anything else about me. :)",
+                "text": "Hello, even though I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, fun facts or anything else about me. :)",
                 "buttons": [
                     {
                         "type": "postback",
@@ -233,7 +233,7 @@ module.exports = {
     },
     smile:
     {
-        "text": ":)"
+        "text": "😂"
     },
     insult:
     {
@@ -257,7 +257,7 @@ module.exports = {
     },
     user_talk:
     {
-        "text": "Ok pour it out.. I am a great listener and I won't judge you. You can tell me anything :)"
+        "text": "Alrighty then! You can tell me about your day, a story or pretty much anything else. I am here for you and I care about you. <3"
     },
     contribute:
     {
@@ -309,6 +309,9 @@ module.exports = {
     sad:
     {
         "text": ":/"
+    },
+    meme: function() {
+        return attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
     },
     // preston_request:
     // {

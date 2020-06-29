@@ -65,6 +65,9 @@ function handleAttachmentPayload(payload, user) {
     else if (payload == "interest") {
         payloadResponse = responses.preston_details.interest(user);
     }
+    else if (payload == "meme") {
+        payloadResponse = responses.meme();
+    }
     // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
     return payloadResponse;
 }

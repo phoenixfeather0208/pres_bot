@@ -8,20 +8,20 @@ module.exports = {
         chineseName: "王列圣",
         pinyin: "wáng-liè-shèng",
         printStatement: function() {
-            return `My full name is ${this.fullName}, or ${this.chineseName} in Chinese, pronounced: ${this.pinyin}.`
+            return `My full name is ${this.fullName}, and ${this.chineseName} in Chinese, pronounced: ${this.pinyin}.`
         }
     },
 
     age: 
     {
-        dob: new Date(1996,9,6),
+        dob: new Date(1996,8,6), // note: month begins at 0. January = 0, February = 1, and so on...
         getAge: function() {
             let ageInMilliseconds = Date.now() - this.dob;
             let ageDate = new Date(ageInMilliseconds);
             return Math.abs(ageDate.getFullYear() - 1970);
         },
         birthdayStatement: function() {
-            return `I was born on ${ this.dob.toDateString() }`
+            return `I was born on ${this.dob.toDateString() } 👶`
         },
         ageStatement: function() {
             return `I am ${this.getAge()} years old! `
@@ -34,10 +34,10 @@ module.exports = {
         hometown: "Malacca Town",
         ethnicity: "Chinese Malaysian",
         originStatement: function() {
-            return `I was born and raised in the beautiful town of ${this.hometown}, ${this.country}`
+            return `I was born and raised in the beautiful town of ${this.hometown}, ${this.country} 🇲🇾`
         },
         ethnicityStatement: function() {
-            return `I identified myself as a proud Chinese Malaysian, I speak Mandarin Chinese.`
+            return `I identified myself as a proud ${this.ethnicity}, I speak Mandarin Chinese.`
         }
     },
 
@@ -107,7 +107,7 @@ module.exports = {
             college: "University of California, Davis",
             major: "Computer Science with Econ minor",
             educationStatement: function() {
-                return `I graduated from ${this.college}, on ${this.grad_year.toDateString()}, majored in ${this.major}.`
+                return `I graduated from ${this.college}, on ${this.grad_year.toDateString()}, majored in ${this.major} 🎓.`
             }
         },
 

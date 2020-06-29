@@ -185,7 +185,7 @@ module.exports = {
             "payload":
             {
                 "template_type": "button",
-                "text": "Although I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, fun facts or anything else about me. :)",
+                "text": "Although I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, social media info, fun facts or anything else about me. :)",
                 "buttons": [
                     {
                         "type": "postback",

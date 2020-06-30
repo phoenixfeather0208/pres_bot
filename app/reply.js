@@ -60,6 +60,13 @@ function handleReplyPayload(payload, user) {
     else if (payload == "contribute") {
         replyPayload = responses.contribute;
     }
+    else if (payload == "tell") {
+        index.sendAPI(process.env.PRESTON_PSID, responses.missingPreston(user));
+        replyPayload = responses.quick_reply_miss;
+    }
+    else if (payload == "confide") {
+        replyPayload = responses.confidement;
+    }
 
     // // users want to interact with Preston.
     // else if (payload == "human") {

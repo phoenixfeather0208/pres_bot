@@ -156,6 +156,10 @@ function responseHandler(nlp_entities, message, user) {
             else if ((intent[0].name == "confidement")) {
                 return responses.confidement;
             }
+
+            else if ((intent[0].name == "sentiment")) {
+                return responses.sentiment;
+            }
         }
 
         // out-of-scope message.

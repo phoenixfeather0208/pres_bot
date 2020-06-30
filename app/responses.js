@@ -369,6 +369,29 @@ module.exports = {
     confidement: {
         "text" : "Your secret is safe with me. Preston does not have direct access to this conversation on the Messenger app. He promised to not abuse his power as the creator to eavesdrop on our conversation by accessing my server log."
     },
+    sentiment: {
+        "text" : "Aww I miss you too! <3. Would you like me to pass the message to Preston?",
+        "quick_replies" : [
+            {
+                "content_type": "text",
+                "title": "Yes",
+                "payload": "tell"
+            },
+            {
+                "content_type": "text",
+                "title": "Nope",
+                "payload": "confide"
+            }
+        ]
+    },
+    missingPreston: function(user) {
+        return {
+            "text": `Hey, man! ${user.first_name} really missed you. :)`
+        }
+    },
+    quick_reply_miss: {
+        "text" : "Message sent. Thanks for making my day. <3"
+    },
     // preston_request:
     // {
     //     "text": "Ok! Let me get a hold of him..."

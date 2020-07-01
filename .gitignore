@@ -1,7 +1,5 @@
 .gcloudignore
 .env
-*.json
 node_modules
-*.yaml
 *.code-workspace
 *.sh

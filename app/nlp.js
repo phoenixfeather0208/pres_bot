@@ -160,6 +160,10 @@ function responseHandler(nlp_entities, message, user) {
             else if ((intent[0].name == "sentiment")) {
                 return responses.sentiment;
             }
+
+            else if ((intent[0].name == "Hometown")) {
+                return responses.preston_details.hometown;
+            }
         }
 
         // out-of-scope message.

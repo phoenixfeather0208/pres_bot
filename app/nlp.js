@@ -164,6 +164,22 @@ function responseHandler(nlp_entities, message, user) {
             else if ((intent[0].name == "Hometown")) {
                 return responses.preston_details.hometown;
             }
+
+            else if ((intent[0].name == "prolang")) {
+                return responses.preston_details.prolang;
+            }
+
+            else if ((intent[0].name == "education")) {
+                return responses.preston_details.education;
+            }
+
+            else if ((intent[0].name == "achievement")) {
+                return responses.preston_details.achievement;
+            }
+
+            else if ((intent[0].name == "prointerest")) {
+                return responses.preston_details.prointerest;
+            }
         }
 
         // out-of-scope message.

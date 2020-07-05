@@ -120,7 +120,7 @@ module.exports = {
     },
     get_started:
     {
-        "text": "To begin, say hi! :)"
+        "text": "To begin, pick an option from the hamburger (horizontal bars) menu or say hi! :)"
     },
     quick_reply_talk:
     {

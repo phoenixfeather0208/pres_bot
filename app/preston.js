@@ -135,7 +135,9 @@ module.exports = {
         "https://i.kym-cdn.com/entries/icons/original/000/033/222/moneyprintergobrrr.jpg",
         "https://i.redd.it/3uxn3hznsp751.jpg",
         "https://scontent.fsac1-1.fna.fbcdn.net/v/t1.0-9/99150366_1962510987221402_1871085752129945600_o.jpg?_nc_cat=108&_nc_sid=9267fe&_nc_ohc=024hPipmgZsAX8eCKl0&_nc_ht=scontent.fsac1-1.fna&oh=1252f112d257f53e2e7dfef752c218f3&oe=5F20F322",
-        "https://preview.redd.it/gpkzwghyor751.jpg?width=640&crop=smart&auto=webp&s=d52113dcfc5950cb936df3a26f9d379ece3a4f80"
+        "https://preview.redd.it/gpkzwghyor751.jpg?width=640&crop=smart&auto=webp&s=d52113dcfc5950cb936df3a26f9d379ece3a4f80",
+        "https://scontent.fsac1-2.fna.fbcdn.net/v/t1.0-9/83426154_5697322970285243_7142420911789038917_n.jpg?_nc_cat=1&_nc_sid=8bfeb9&_nc_ohc=uBMGrUfXh0gAX9K6pRN&_nc_ht=scontent.fsac1-2.fna&oh=7eb4128c85270cc0132dcec82db05acb&oe=5F25D5F3",
+        "https://scontent.fsac1-2.fna.fbcdn.net/v/t1.0-0/p526x296/106704323_2001278263344674_4928797646756992013_o.jpg?_nc_cat=1&_nc_sid=8bfeb9&_nc_ohc=vm0zbfGS-dQAX9OvkgW&_nc_ht=scontent.fsac1-2.fna&_nc_tp=6&oh=f35ba4ca71fb976bd36782c12365a52d&oe=5F2787BC"
     ],
 
     url: {

@@ -11,7 +11,7 @@ Built for fun. This project is really intended for Preston to explore applicatio
 
 ----------
 
-This project is currently available to testers, and the bot is still in training. This bot will be made live as soon as possible.
+The bot is live. Begin conversation [here](http://m.me/presbot4896/). The bot is still in training, therefore your participation in engaging a conversation is really appreciated.
 
 ## Prerequisites:
 Before you begin testing the code and running the bot on your machine, you must perform **all** steps listed below.
@@ -34,14 +34,14 @@ Before you begin testing the code and running the bot on your machine, you must 
 
 ### Step 1: Set up the webhook. [Docs](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup)
 
-#### A. On Your Local Machine
+#### Option A: On Your Local Machine
 I use the `localtunnel` npm package to listen for incoming webhook events. Run `$ npm install -g localtunnel`.
 
 Then, run `$ lt -h "http://serverless.social" -p <YOUR PORT NUMBER>`
 
 A **public** webhook URL will be generated. Set it as your callback URL. 
 
-#### B. Remotely
+#### Option B: Remotely
 You may either:
 - Perform the same steps as A on a remote server.
 
@@ -55,4 +55,4 @@ To learn how to deploy a container image to Cloud Run, read this [documentation]
 
 ### Step 3 (Optional): If you are interested in getting NLP trained data of this bot, you must create a wit.ai account, then click [here](https://wit.ai/v2/apps/397718547802889).
 
-Last updated: June 30th, 2020.
+Last updated: July 6th, 2020.

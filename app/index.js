@@ -60,7 +60,8 @@ app.post('/webhook', (req, res) => {
             // Get the sender's PSID
             let sender_psid = webhook_event.sender.id;
             console.log("Webhook Event: \n", util.inspect(webhook_event, false, null, true /* enable colors */));
-            
+            console.log("debug psid: " + sender_psid);
+
             // detect guest users
             let user_is_guest = webhook_event.hasOwnProperty("postback") && webhook_event.postback.hasOwnProperty("referral") && webhook_event.postback.referral.is_guest_user;
             if (user_is_guest) {
@@ -80,7 +81,7 @@ app.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(user, received_message) {
+function handleMessage(user, received_message, psid) {
     let response;
 
     // check if the message contains text
@@ -100,27 +101,27 @@ function handleMessage(user, received_message) {
     }
 
     // sends the response
-    callSendAPI(user.id, response);
+    callSendAPI(psid, response);
 }
 
 // Handles messaging_postbacks events
-function handlePostback(user, received_postback) {
+function handlePostback(user, received_postback, psid) {
     let response;
     // get the payload for the postback
     let payload = received_postback.payload;
     response = attachment.handleAttachmentPayload(payload, user);
     // send the response
-    callSendAPI(user.id, response);
+    callSendAPI(psid, response);
 }
 
 // Handles quick reply
-function handleQuickReplies(user, quickRepliesEvent) {
+function handleQuickReplies(user, quickRepliesEvent, psid) {
     let response;
     let payload = quickRepliesEvent.payload;
     response = reply.handleReplyPayload(payload, user);
 
     // send the response
-    callSendAPI(user.id, response);
+    callSendAPI(psid, response);
 }
 
 // Sends response messages via the Send API
@@ -226,17 +227,17 @@ function get_user_profile_then_respond(psid, event) {
                     sender_action(psid, true);
                     setTimeout(() => {
                         if (event.message.quick_reply) {
-                            handleQuickReplies(obj, event.message.quick_reply);
+                            handleQuickReplies(obj, event.message.quick_reply, psid);
                         }
                         else {
-                            handleMessage(obj, event.message);
+                            handleMessage(obj, event.message, psid);
                         }
                     }, 750)
                 }
                 else if (event.postback) {
                     sender_action(psid, true);
                     setTimeout(() => {
-                        handlePostback(obj, event.postback);
+                        handlePostback(obj, event.postback, psid);
                     }, 750)
                 }
             }

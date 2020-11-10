@@ -60,6 +60,13 @@ app.post('/webhook', (req, res) => {
             // Get the sender's PSID
             let sender_psid = webhook_event.sender.id;
             console.log("Webhook Event: \n", util.inspect(webhook_event, false, null, true /* enable colors */));
+            
+            // detect guest users
+            let user_is_guest = webhook_event.hasOwnProperty("postback") && webhook_event.postback.hasOwnProperty("referral") && webhook_event.postback.referral.is_guest_user;
+            if (user_is_guest) {
+                set_persistent_menu(sender_psid);
+            }
+
             get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
@@ -80,7 +87,10 @@ function handleMessage(user, received_message) {
     if (received_message.text) {
         // debug
         console.log("Message received: "+received_message.text);
-        response = nlp.response(received_message.nlp, received_message.text, user);
+        // response = nlp.response(received_message.nlp, received_message.text, user);
+        response = {
+            "text" : `Sorry, ${user.first_name}. My NLP model is not functioning and currently under maintenance at the moment. Meanwhile, select an option from the hamburger menu down below. :(`
+        }
     }
 
     else if (received_message.attachments) {
@@ -142,6 +152,50 @@ function callSendAPI(sender_psid, response) {
     })
 }
 
+// request to set persistent menu for guest
+function set_persistent_menu(psid) {
+    let request_body = {
+        "psid": `${psid}`,
+        "persistent_menu": [
+            {
+                "locale": "default",
+                "composer_input_disabled":true,
+                "call_to_actions": [
+                    {
+                        "type": "postback",
+                        "title": "Get To Know Me",
+                        "payload": "intro"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "See My Portfolio",
+                        "payload": "hire"
+                    },
+                    {
+                        "type": "postback",
+                        "title": "Report An Issue",
+                        "payload": "contribute"
+                    }
+                ]
+            }
+        ]
+    }
+    request(
+        {
+            "url" : `https://graph.facebook.com/v8.0/me/custom_user_settings?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+            "method" : "POST",
+            "json" : request_body
+        }, (err, body) => {
+            if (err) {
+                console.error("Failed to set persistent menu");
+            }
+            else {
+                console.log("Successfully updated persistent menu for: " + psid);
+            }
+        }
+    )
+}
+
 // get user profile info and respond.
 function get_user_profile_then_respond(psid, event) {
     request(
@@ -157,7 +211,7 @@ function get_user_profile_then_respond(psid, event) {
                 
                 // debug
                 // console.log("pageToken: " + process.env.PAGE_ACCESS_TOKEN);
-                // console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
+                console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
                 
                 
                 // console.log("Preston is live? " + sendingAsPersona);

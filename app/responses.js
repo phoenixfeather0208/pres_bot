@@ -120,7 +120,7 @@ module.exports = {
     },
     get_started:
     {
-        "text": "To begin, pick an option from the hamburger (horizontal bars) menu or say hi! :)"
+        "text": "To begin, pick an option from the hamburger (horizontal bars) menu. :)"
     },
     quick_reply_talk:
     {
@@ -135,11 +135,6 @@ module.exports = {
                 "content_type": "text",
                 "title": "See My Portfolio",
                 "payload": "hire"
-            },
-            {
-                "content_type": "text",
-                "title": "Shh... let me talk",
-                "payload": "story"
             }
         ]
     },

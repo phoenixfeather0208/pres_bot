@@ -55,4 +55,7 @@ To learn how to deploy a container image to Cloud Run, read this [documentation]
 
 ### Step 3 (Optional): If you are interested in getting NLP trained data of this bot, you must create a wit.ai account, then click [here](https://wit.ai/v2/apps/397718547802889).
 
-Last updated: July 6th, 2020.
+## Important Update:
+The code for the NLP model for PresBot is not functioning at the moment. I had to temporarily disabled the text composer for now and get it fixed as soon as possible.
+
+Last updated: November 9th, 2020.

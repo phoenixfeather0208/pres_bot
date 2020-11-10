@@ -10,8 +10,10 @@ Preston Ong is very shy in person, so hopefully a bot can be used as alternative
 Built for fun. This project is really intended for Preston to explore applications of machine learning and to familiarize himself of using NLP tool to enable machines to accurately interpret human language. This project is also used to showcase Preston's skills in software engineering, specifically in NodeJS and cloud computing.
 
 ----------
+## Important Notice:
+I had temporarily disabled the text composer because the bot will crash if the user sends a text on Guest Mode. That is because the `message` object returned by the Facebook API does not contain the `nlp` member. An undefined `nlp` body would lead to a fatal error. I am working on an alternative solution which I might create a workaround method such that the guest's messages can still be fed to Wit.ai with possibly the use of HTTP request, instead of Facebook's built-in NLP object in the webhook event. This is currently still a work in progress.
 
-The bot is live. Begin conversation [here](http://m.me/presbot4896/). The bot is still in training, therefore your participation in engaging a conversation is really appreciated.
+Otherwise, the bot is still live. Begin conversation [here](http://m.me/presbot4896/).
 
 ## Prerequisites:
 Before you begin testing the code and running the bot on your machine, you must perform **all** steps listed below.
@@ -54,8 +56,5 @@ To learn how to deploy a container image to Cloud Run, read this [documentation]
 ### Step 2: RUN THE BOT! Enter `$ node app/index.js` (Local Machine only)
 
 ### Step 3 (Optional): If you are interested in getting NLP trained data of this bot, you must create a wit.ai account, then click [here](https://wit.ai/v2/apps/397718547802889).
-
-## Important Update:
-The code for the NLP model for PresBot is not functioning at the moment. I had to temporarily disabled the text composer for now and get it fixed as soon as possible.
 
 Last updated: November 9th, 2020.

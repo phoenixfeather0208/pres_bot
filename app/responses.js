@@ -356,14 +356,17 @@ module.exports = {
     },
     meme: function() {
         // return attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
-        let returnObj = attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
-        returnObj["quick_replies"] = [
-            {
-                "content_type": "text",
-                "title": "More Memes",
-                "payload": "memes"
-            }
-        ];
+        // let returnObj = attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
+        // returnObj["quick_replies"] = [
+        //     {
+        //         "content_type": "text",
+        //         "title": "More Memes",
+        //         "payload": "memes"
+        //     }
+        // ];
+        let returnObj = {
+            "text" : "Hey, as much as I love memes, I have been asleep for a while. Now I am out collecting more memes. Stay Tuned!"
+        }
         return returnObj;
     },
     confidement: {
@@ -435,8 +438,9 @@ module.exports = {
     // },
     out_of_scope: function(name, message)
     {
+        let firstName = name ? name : "Guest"
         return {
-            "text": `Hey, ${name}. I am sorry, but I do not understand "${message}". Continue?`,
+            "text": `Hey, ${firstName}. I am sorry, but I do not understand "${message}". Continue?`,
             "quick_replies": [
                 {
                     "content_type": "text",

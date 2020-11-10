@@ -154,7 +154,9 @@ function get_user_profile_then_respond(psid, event) {
             }
             else {
                 let obj = JSON.parse(body.body);
-                // // debug
+                
+                // debug
+                // console.log("pageToken: " + process.env.PAGE_ACCESS_TOKEN);
                 // console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
                 
                 

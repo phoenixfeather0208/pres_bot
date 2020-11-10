@@ -18,7 +18,7 @@ function responseAttachment(url, user) {
         }
     }
     else {
-        let caption = "Sorry, I do not understand memes yet, but I have a meme for you: ";
+        let caption = "Sorry, I do not understand memes yet. ";
         let memeURL = index.randomOutput(preston.favoriteMemesURL);
         return generate_attachment("image", memeURL, caption, user);
     }

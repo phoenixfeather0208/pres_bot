@@ -30,7 +30,6 @@ Before you begin testing the code and running the bot on your machine, you must 
     - `PAGE_ACCESS_TOKEN`
     - `APP_SECRET`
     - `VERIFY_TOKEN`, this can be a randomly generated 16-bit string.
-    - `PRESTON_PSID = 3117047504997148` , this is used when the bot is sending a direct response to Preston Ong's User Profile.
 
 ## Instructions To Use:
 

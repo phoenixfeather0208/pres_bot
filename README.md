@@ -1,5 +1,9 @@
 # PresBot - Facebook Messenger Bot by Preston Ong
 
+[![GitHub](https://img.shields.io/badge/PresBot-online-brightgreen)](http://m.me/presbot4896/)
+[![GitHub](https://img.shields.io/github/license/preston4896/pres_bot?color=blue)](https://github.com/preston4896/pres_bot/blob/master/LICENSE)
+
+
 Inspired by Gilfoyle's AI Bot, from the TV show, Silicon Valley. [Link to video](https://www.youtube.com/watch?v=IWIusSdn1e4)
 
 ## Summary:

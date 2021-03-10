@@ -175,6 +175,11 @@ function handleMessage(user, received_message, psid) {
 
     if (received_message.text) {
         // TODO: NLP response here
+        
+        // TEMP
+        response = {
+            "text" : "Sorry, I don't understand what you said. My NLP model is currently under development. :("
+        }
     }
 
     if (received_message.attachments) {

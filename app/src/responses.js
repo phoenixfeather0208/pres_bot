@@ -1,7 +1,9 @@
 "strict mode";
 
+// This module contains all of the bot's responses.
+
 const preston = require("./preston");
-const index = require("./index");
+const index = require("../index");
 const attachment = require("./attachment");
 const util = require("util");
 
@@ -158,7 +160,7 @@ module.exports = {
                             },
                             {
                                 "type": "web_url",
-                                "url": "https://prestonongis.online/",
+                                "url": "https://prestonong.com/",
                                 "title": "Website"
                             },
                             {
@@ -180,7 +182,7 @@ module.exports = {
             "payload":
             {
                 "template_type": "button",
-                "text": "Although I am a bot, I speak on behalf of Preston. You may pick an option below or ask me questions about my ethnicity, social media info, fun facts or anything else about me. :)",
+                "text": "I am a bot, but I speak on behalf of Preston. What would you like to know more about me?",
                 "buttons": [
                     {
                         "type": "postback",
@@ -287,7 +289,7 @@ module.exports = {
         ]
     },
     quick_reply_makeFun: function(user) {
-        return attachment.sendAttachment("image", "https://i.kym-cdn.com/entries/icons/original/000/032/468/snape.jpg", "Lmao! Preston be like this...", user);
+        return attachment.sendAttachment("image", "https://drive.google.com/uc?export=view&id=19RHERnzmee_45OAB6dD9iMXl-OrfNHR9", "Lmao! Preston be like this...", user);
     },
     makeFun_preston: function(name){
         return {
@@ -350,18 +352,17 @@ module.exports = {
         "text": ":/"
     },
     meme: function() {
-        // return attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
-        // let returnObj = attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
-        // returnObj["quick_replies"] = [
-        //     {
-        //         "content_type": "text",
-        //         "title": "More Memes",
-        //         "payload": "memes"
-        //     }
-        // ];
-        let returnObj = {
-            "text" : "Hey, as much as I love memes, I have been asleep for a while. Now I am out collecting more memes. Stay Tuned!"
-        }
+        let returnObj = attachment.sendAttachment("image", index.randomOutput(preston.favoriteMemesURL));
+        returnObj["quick_replies"] = [
+            {
+                "content_type": "text",
+                "title": "More Memes",
+                "payload": "memes"
+            }
+        ];
+        // let returnObj = {
+        //     "text" : "Hey, as much as I love memes, I have been asleep for a while. Now I am out collecting more memes. Stay Tuned!"
+        // }
         return returnObj;
     },
     confidement: {
@@ -384,7 +385,8 @@ module.exports = {
     },
     missingPreston: function(user) {
         return {
-            "text": `Hey, man! ${user.first_name} really missed you. :)`
+            // "text": `Hey, man! ${user.first_name} really missed you. :)`
+            "text": `Hey, man! Someone really missed you. :)`
         }
     },
     quick_reply_miss: {

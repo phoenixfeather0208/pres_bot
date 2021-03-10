@@ -1,12 +1,14 @@
 {
-  "name": "messenger-bot",
+  "name": "PresBot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Preston Ong's AI Bot running on the Messenger app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build" : "docker build -t presbot . && gcloud builds submit --tag gcr.io/presbot-messenger/presbot",
+    "local" : "docker run -dp 1337:1337 presbot",
+    "deploy" : "gcloud run deploy --image gcr.io/presbot-messenger/presbot --platform managed"
   },
-  "author": "",
+  "author": "Preston Ong",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",

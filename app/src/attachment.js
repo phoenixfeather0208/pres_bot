@@ -1,8 +1,10 @@
 "strict mode";
 
+// This module handles messages containing attachments.
+
 // debug
 const util = require("util");
-const index = require("./index");
+const index = require("../index");
 
 /**
  * Respond with a generic template based on the image url.
@@ -65,7 +67,7 @@ function handleAttachmentPayload(payload, user) {
     else if (payload == "interest") {
         payloadResponse = responses.preston_details.interest(user);
     }
-    else if (payload == "meme") {
+    else if (payload == "memes") {
         payloadResponse = responses.meme();
     }
     // console.log("payload response: ", util.inspect(payloadResponse, false, null, true /* enable colors */))
@@ -81,13 +83,13 @@ function handleAttachmentPayload(payload, user) {
  * @returns {object} 
  */
 function generate_attachment(type, url, caption, user) {
-    if ((caption != undefined) && (user != undefined)) {
-        let textResponse = {
+    let response = {};
+    if ((caption != undefined)) {
+        response = {
             "text": caption
         }
-        index.sendAPI(user.id, textResponse);
     }
-    let response = 
+    else response = 
     {
         "attachment": {
             "type": type,

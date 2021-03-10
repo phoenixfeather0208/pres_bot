@@ -1,14 +1,18 @@
 "strict mode";
 
+// dependencies
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express().use(bodyParser.json());
 const request = require("request");
+
+// env config
 require("dotenv").config();
-const nlp = require("./nlp");
-const attachment = require("./attachment");
-const reply = require("./reply");
-// const seedRandom = require("seedrandom");
+
+// import code
+// const nlp = require("./src/nlp");  -- TODO
+const attachment = require("./src/attachment"); // process attachments.
+const reply = require("./src/reply"); // process quick replies.
 
 // debug
 const util = require("util");
@@ -22,14 +26,14 @@ app.get('/webhook', (req, res) => {
     let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
     // Parse the query params
-    let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
     let challenge = req.query['hub.challenge'];
+    let mode = req.query['hub.mode'];
 
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
 
-        // Checks the mode and token sent is correct
+        // Checks the token sent is correct
         if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
             // Responds with the challenge token from the request
@@ -60,14 +64,10 @@ app.post('/webhook', (req, res) => {
             // Get the sender's PSID
             let sender_psid = webhook_event.sender.id;
             console.log("Webhook Event: \n", util.inspect(webhook_event, false, null, true /* enable colors */));
-            // console.log("debug psid: " + sender_psid);
 
-            // detect guest users
-            // let user_is_guest = webhook_event.hasOwnProperty("postback") && webhook_event.postback.hasOwnProperty("referral") && webhook_event.postback.referral.is_guest_user;
-            // if (user_is_guest) {
-            //     set_persistent_menu(sender_psid);
-            // }
+            // set_persistent_menu(sender_psid);
 
+            // get the user's profile then send POST request to the Graph API to respond to users.
             get_user_profile_then_respond(sender_psid, webhook_event);
         });
 
@@ -80,21 +80,104 @@ app.post('/webhook', (req, res) => {
     }
 });
 
-// Handles messages events
+// request to set persistent menu for guest
+// function set_persistent_menu(psid) {
+//     let request_body = {
+//         "psid": '"' + psid + '"',
+//         "persistent_menu": [
+//             {
+//                 "locale": "default",
+//                 "composer_input_disabled" : true,
+//                 "call_to_actions": [
+//                     {
+//                         "type": "postback",
+//                         "title": "Self-Introduction",
+//                         "payload": "intro"
+//                     },
+//                     {
+//                         "type": "postback",
+//                         "title": "See My Portfolio",
+//                         "payload": "hire"
+//                     },
+//                     {
+//                         "type": "postback",
+//                         "title": "Report An Issue",
+//                         "payload": "contribute"
+//                     }
+//                 ]
+//             }
+//         ]
+//     }
+//     request(
+//         {
+//             "url" : `https://graph.facebook.com/v8.0/me/custom_user_settings?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+//             "method" : "POST",
+//             "json" : request_body
+//         }, (err, body) => {
+//             if (err) {
+//                 console.error("Failed to set persistent menu");
+//             }
+//             else {
+//                 console.log("Successfully updated persistent menu: \n", util.inspect(request_body, false, null, true /* enable colors */));
+//             }
+//         }
+//     )
+// }
+
+// get user profile info and respond.
+function get_user_profile_then_respond(psid, event) {
+    request(
+        {
+        "url": `https://graph.facebook.com/${psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.PAGE_ACCESS_TOKEN}`,
+        "method": "GET"
+        }, (err, body) => {
+            if (err) {
+                console.error("User Profile API error");
+            }
+            else {
+                let userObj = JSON.parse(body.body); // GET request returned an error due to denied permission. Need investigation.
+                
+                // debug
+                console.log("User API returned: \n", util.inspect(userObj, false, null, true /* enable colors */));
+
+                // user and postback inputs.
+                if (event.message) {
+                    sender_action(psid, true);
+                    setTimeout(() => {
+                        // quick-replied payloads.
+                        if (event.message.quick_reply) {
+                            // handleQuickReplies(userObj, event.message.quick_reply, psid);
+                            handleQuickReplies(null, event.message.quick_reply, psid);
+                        }
+                        // user-composed input (text and attachments).
+                        else {
+                            // handleMessage(userObj, event.message, psid);
+                            handleMessage(null, event.message, psid);
+                        }
+                    }, 750)
+                }
+
+                // postback inputs.
+                else if (event.postback) {
+                    sender_action(psid, true);
+                    setTimeout(() => {
+                        handlePostback(null, event.postback, psid);
+                    }, 750)
+                }
+            }
+        }
+    )
+}
+
+// TODO: Develop NLP model first, then handle messages events
 function handleMessage(user, received_message, psid) {
     let response;
 
-    // check if the message contains text
     if (received_message.text) {
-        // debug
-        console.log("Message received: "+received_message.text);
-        // response = nlp.response(received_message.nlp, received_message.text, user);
-        response = {
-            "text" : `Sorry, ${user.first_name}. My NLP model is experiencing technical difficulties at the moment. Meanwhile, select an option from the hamburger menu down below. :(`
-        }
+        // TODO: NLP response here
     }
 
-    else if (received_message.attachments) {
+    if (received_message.attachments) {
         // Get the URL of the attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = attachment.responseAttachment(attachment_url, user);
@@ -142,7 +225,7 @@ function callSendAPI(sender_psid, response) {
     // send the POST request to the Messenger platform
     request(
         {
-        "url": "https://graph.facebook.com/v7.0/me/messages",
+        "url": "https://graph.facebook.com/v8.0/me/messages",
         "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN},
         "method": "POST",
         "json": request_body
@@ -151,97 +234,6 @@ function callSendAPI(sender_psid, response) {
             console.error("Unable to send message: " + err);
         }
     })
-}
-
-// request to set persistent menu for guest
-// function set_persistent_menu(psid) {
-//     let request_body = {
-//         "psid": '"' + psid + '"',
-//         "persistent_menu": [
-//             {
-//                 "locale": "default",
-//                 "composer_input_disabled":true,
-//                 "call_to_actions": [
-//                     {
-//                         "type": "postback",
-//                         "title": "Hi Stranger",
-//                         "payload": "intro"
-//                     },
-//                     {
-//                         "type": "postback",
-//                         "title": "See My Portfolio",
-//                         "payload": "hire"
-//                     },
-//                     {
-//                         "type": "postback",
-//                         "title": "Report An Issue",
-//                         "payload": "contribute"
-//                     }
-//                 ]
-//             }
-//         ]
-//     }
-//     request(
-//         {
-//             "url" : `https://graph.facebook.com/v8.0/me/custom_user_settings?access_token=${process.env.PAGE_ACCESS_TOKEN}`,
-//             "method" : "POST",
-//             "json" : request_body
-//         }, (err, body) => {
-//             if (err) {
-//                 console.error("Failed to set persistent menu");
-//             }
-//             else {
-//                 console.log("Successfully updated persistent menu: \n", util.inspect(request_body, false, null, true /* enable colors */));
-//             }
-//         }
-//     )
-// }
-
-// get user profile info and respond.
-function get_user_profile_then_respond(psid, event) {
-    request(
-        {
-        "url": `https://graph.facebook.com/${psid}?fields=first_name,last_name,profile_pic&access_token=${process.env.PAGE_ACCESS_TOKEN}`,
-        "method": "GET"
-        }, (err, body) => {
-            if (err) {
-                console.error("User Profile API error");
-            }
-            else {
-                let obj = JSON.parse(body.body);
-                
-                // debug
-                // console.log("pageToken: " + process.env.PAGE_ACCESS_TOKEN);
-                console.log("User API returned: \n", util.inspect(obj, false, null, true /* enable colors */));
-
-                // console.log("Preston is live? " + sendingAsPersona);
-                // // Human Preston is live.
-                // if ((psid == process.env.PRESTON_PSID)) {
-                //     // Preston's message is sent to the user.
-                    
-                // }
-
-                // check if the event is a message or postback and pass the event to the appropiate handler function
-                if (event.message) {
-                    sender_action(psid, true);
-                    setTimeout(() => {
-                        if (event.message.quick_reply) {
-                            handleQuickReplies(obj, event.message.quick_reply, psid);
-                        }
-                        else {
-                            handleMessage(obj, event.message, psid);
-                        }
-                    }, 750)
-                }
-                else if (event.postback) {
-                    sender_action(psid, true);
-                    setTimeout(() => {
-                        handlePostback(obj, event.postback, psid);
-                    }, 750)
-                }
-            }
-        }
-    )
 }
 
 function sender_action(sender_psid, isTyping) {
@@ -258,7 +250,7 @@ function sender_action(sender_psid, isTyping) {
     }
     request(
         {
-            "url": "https://graph.facebook.com/v7.0/me/messages",
+            "url": "https://graph.facebook.com/v8.0/me/messages",
             "qs": { "access_token": process.env.PAGE_ACCESS_TOKEN },
             "method": "POST",
             "json": request_body

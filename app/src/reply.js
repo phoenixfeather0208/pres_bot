@@ -1,9 +1,11 @@
 "strict mode";
 
+// This module generates the response based on the postback value of quick reply inputs.
+
 // debug
 const util = require("util");
 const responses = require("./responses");
-const index = require("./index");
+const index = require("../index");
 
 // var timeOutID;
 // var trackUser;
@@ -29,7 +31,8 @@ function handleReplyPayload(payload, user) {
         replyPayload =  responses.quick_reply_intro;
     }
     else if (payload == "makeFun") {
-        let preston_response = responses.makeFun_preston(user.first_name);
+        // let preston_response = responses.makeFun_preston(user.first_name);
+        let preston_response = responses.makeFun_preston("A user");
         index.sendAPI(process.env.PRESTON_PSID, preston_response);
         replyPayload =  responses.quick_reply_makeFun(user);
     }
@@ -37,14 +40,17 @@ function handleReplyPayload(payload, user) {
         replyPayload =  responses.user_talk;
     }
     else if (payload == "happy") {
+        // index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         replyPayload =  responses.feedBackResponse[0];
     }
     else if (payload == "neutral") {
+        // index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         replyPayload =  responses.feedBackResponse[1];
     }
     else if (payload == "notHappy") {
+        // index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         index.sendAPI(process.env.PRESTON_PSID, responses.receive_feedback(payload, user.first_name));
         replyPayload =  responses.feedBackResponse[2];
     }

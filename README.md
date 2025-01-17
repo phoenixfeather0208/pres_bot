@@ -4,7 +4,7 @@
 ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/phoenixfeather0208/pres_bot?style=flat-square)
 ![GitHub repo size](https://img.shields.io/github/repo-size/phoenixfeather0208/pres_bot?color=yellow&style=flat-square)
 
-Inspired by Gilfoyle's AI Bot, from the TV show, Silicon Valley. [Link to video](https://www.youtube.com/watch?v=IWIusSdn1e4)
+Inspired by Gilfoyle's AI Bot, from the TV show, Silicon Valley.  [Link to video](https://www.youtube.com/watch?v=IWIusSdn1e4)
 
 ## Summary:
 
